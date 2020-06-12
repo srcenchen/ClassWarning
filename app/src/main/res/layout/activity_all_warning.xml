@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context=".AllWarningActivity">
+    tools:context=".UI.AllWarningActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

@@ -1,4 +1,4 @@
-package com.sanenchen.classWarring;
+package com.sanenchen.classWarring.UI;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.sanenchen.classWarring.ItemAdapter;
+import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.WarningSearchAd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -73,7 +77,7 @@ public class AllWarningActivity extends AppCompatActivity {
                     Looper.loop();
                 } else {
                     SearchList = new ArrayList<>();
-                    for (int i = 0; i < HowMany; i++) {
+                    for (int i = HowMany - 1; i >= 0; i--) {
                         WarningSearchAd warningSearchAd = new WarningSearchAd(WarningTitle[i], WarningStudent[i], WarningID[i]);
                         SearchList.add(warningSearchAd);
                     }

@@ -1,23 +1,19 @@
-package com.sanenchen.classWarring;
+package com.sanenchen.classWarring.UI;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.sanenchen.classWarring.R;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,67 +21,70 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MainActivity extends AppCompatActivity {
+public class TellWarning extends AppCompatActivity {
 
-    String geta = null;
-    ProgressDialog progressDialog;
+    String TitleSt, ItemWarnSt, StudentSt, FunSt, TimeSt, BeizhuSt = null;
+    String MysqlID;
+    public static final int ListViewSet = 1;
+    ProgressDialog progressDialog = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar3);
+        setContentView(R.layout.activity_tell_warning);
+        Toolbar toolbar = findViewById(R.id.toolbar4);
         setSupportActionBar(toolbar);
 
-        progressDialog = new ProgressDialog(MainActivity.this);
+        Intent intent = getIntent();
+        MysqlID = intent.getStringExtra("MysqlID");
+
+        progressDialog = new ProgressDialog(TellWarning.this);
         progressDialog.setTitle("加载数据中");
-        progressDialog.setMessage("正在加载数据，请稍候...");
+        progressDialog.setMessage("正在加载数据，请稍后...");
         progressDialog.setCancelable(false);
         progressDialog.show();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
 
                 DBUtilsGet();
                 Message message = new Message();
-                message.what = 1;
-                handler.sendMessage(message);
-            }
-        }).start();
-
-        WebView webView = findViewById(R.id.WebView);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://blog.lyqmc.cn/index.php/archives/426/");
-
-    }
-
-
-    protected void onRestart() {
-        super.onRestart();
-        progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setTitle("加载数据中");
-        progressDialog.setMessage("正在加载数据，请稍候...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                DBUtilsGet();
-                Message message = new Message();
-                message.what = 1;
+                message.what = ListViewSet;
                 handler.sendMessage(message);
             }
         }).start();
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
-                case 1:
-                    TextView cishu = findViewById(R.id.cishu);
-                    cishu.setText(geta + "次");
+                case ListViewSet:
+                    TextView TitleS = findViewById(R.id.TitleS);
+                    TextView ItemWarnS = findViewById(R.id.ItemWarnS);
+                    TextView StudentS = findViewById(R.id.StudentS);
+                    TextView FunS = findViewById(R.id.FunS);
+                    TextView TimeS = findViewById(R.id.TimeS);
+                    TextView BeizhuS = findViewById(R.id.BeizhuS);
+                    LinearLayout linearLayout = findViewById(R.id.TimeZoneF);
+                    if (FunSt.equals("回家反省")) {
+                        linearLayout.setVisibility(LinearLayout.VISIBLE);
+                    }
+
+
+                    TitleS.setText(TitleSt);
+                    ItemWarnS.setText(ItemWarnSt);
+                    StudentS.setText(StudentSt);
+                    FunS.setText(FunSt);
+                    TimeS.setText(TimeSt);
+                    if (BeizhuSt == null) {
+                        BeizhuS.setText("无备注");
+                    } else {
+                        BeizhuS.setText(BeizhuSt);
+                    }
+
                     progressDialog.dismiss();
                     break;
 
@@ -112,12 +111,17 @@ public class MainActivity extends AppCompatActivity {
             // 执行查询
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM WarningTotal";
+            sql = "SELECT * FROM WarringA WHERE id=" + MysqlID;
             rs = stmt.executeQuery(sql);
 
             // 展开结果集数据库
             while (rs.next()) {
-                geta = rs.getString("WarningTotal");
+                TitleSt = rs.getString("WarringT");
+                ItemWarnSt = rs.getString("WarringWhat");
+                StudentSt = rs.getString("WarringStudent");
+                FunSt = rs.getString("HowToWarring");
+                TimeSt = rs.getString("StartAlone") + "至" + rs.getString("EndAlone");
+                BeizhuSt = rs.getString("Beizhu");
             }
             //return rs;
             rs.close();
@@ -146,28 +150,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.uplod:
-                Intent intent = new Intent(MainActivity.this,ClassWarringUpLoad.class);
-                startActivity(intent);
-                break;
-            case R.id.search:
-                Intent intent1 = new Intent(MainActivity.this,ClassWarningSearchActivity.class);
-                startActivity(intent1);
-                break;
-            case R.id.AllWarn:
-                Intent intent2 = new Intent(MainActivity.this,AllWarningActivity.class);
-                startActivity(intent2);
-                break;
-        }
-        return true;
-    }
 }

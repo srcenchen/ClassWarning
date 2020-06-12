@@ -1,8 +1,8 @@
 package com.sanenchen.classWarring.Sql;
 
-import android.provider.ContactsContract;
+import android.util.Base64;
 
-import com.sanenchen.classWarring.ClassWarningSearchActivity;
+import com.sanenchen.classWarring.UI.ClassWarningSearchActivity;
 
 import java.sql.*;
 
@@ -73,6 +73,7 @@ public class DBUtils {
         //return rs;
     }
 
+    // 录入违纪信息主数据库
     public void DBUtilsPut(String Title, String WarningGroup, String WarningStudent, String WarningFun, String FunStartTime, String FunEndTime, String BeizhuSS) {
         Connection conn = null;
         Statement stmt = null;
@@ -126,4 +127,69 @@ public class DBUtils {
             }
         }
     }
+
+    // 这里是检测登录信息是否与提供的信息所一致！
+    public String CheckLoginInfoDB(String getUser, String getPassword) {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        /**
+         * 解释下这里 Return都是什么意思哈
+         * return 0 代表登录失败（用户名或密码错误）
+         * return 1 代表登陆成功
+         * return 3 代表登录失败（网络错误）
+         */
+
+        try {
+            // 注册 JDBC 驱动
+            Class.forName(JDBC_DRIVER);
+
+            // 打开链接
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // 执行查询
+            stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT * FROM UserTable WHERE userName='" + getUser + "'";
+            rs = stmt.executeQuery(sql);
+            String PassWordBase64 = Base64.encodeToString(getPassword.getBytes(), Base64.DEFAULT).replace("\n","");
+            // 将密码进行Base64加密，replace参数：将换行符去掉，不知道为啥会出现换行符，有点迷
+
+            // 展开结果集数据库
+            while (rs.next()) {
+                if (rs.getString("passWord").equals(PassWordBase64)) {
+                    return getUser;
+                } else {
+                    return "0";
+                }
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+            return "0";
+
+        } catch (SQLException se) {
+            // 处理 JDBC 错误
+            se.printStackTrace();
+            return "3";
+        } catch (Exception e) {
+            // 处理 Class.forName 错误
+            e.printStackTrace();
+            return "3";
+        } finally {
+            // 关闭资源
+            try {
+                if (stmt != null) stmt.close();
+            } catch (SQLException se2) {
+            }// 什么都不做
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+
 }

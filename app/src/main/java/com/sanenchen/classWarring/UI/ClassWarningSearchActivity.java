@@ -1,7 +1,6 @@
-package com.sanenchen.classWarring;
+package com.sanenchen.classWarring.UI;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -16,7 +15,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.sanenchen.classWarring.Sql.DBUtils;
+import com.sanenchen.classWarring.ItemAdapter;
+import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.WarningSearchAd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -84,7 +85,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
                             Looper.loop();
                         } else {
                             SearchList = new ArrayList<>();
-                            for (int i = 0; i < HowMany; i++) {
+                            for (int i = HowMany - 1; i >= 0; i--) {
                                 WarningSearchAd warningSearchAd = new WarningSearchAd(WarningTitle[i], WarningStudent[i], WarningID[i]);
                                 SearchList.add(warningSearchAd);
                             }
