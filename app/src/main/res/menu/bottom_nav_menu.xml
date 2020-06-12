@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/AllWarn"
+        android:icon="@drawable/all"
+        android:title="所有违纪"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/uplod"
+        android:icon="@drawable/edit"
+        android:title="上报违纪"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/search"
+        android:title="查询违纪"
+        app:showAsAction="always" />
+
+
+</menu>
