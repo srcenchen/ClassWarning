@@ -23,9 +23,15 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sanenchen.classWarring.Sql.DBUtils;
+import com.sanenchen.classWarring.GetMysqlData.getDataJson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.TimeZone;
 
 public class ClassWarringUpLoad extends AppCompatActivity{
 
@@ -119,8 +125,6 @@ public class ClassWarringUpLoad extends AppCompatActivity{
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        // 调用数据库工具类DBUtils的getInfoByName方法获取数据库表中数据
-                        DBUtils dbUtils = new DBUtils();
                         String WarningGroup = "";
                         if (WarningTalk.isChecked()) {
                             WarningGroup = "讲话 ";
@@ -141,7 +145,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
                             if (!WarningGroup.equals("") && !FunCheck.equals("") && !WarningTitle.getText().toString().equals("") && !WarningStudent.getText().toString().equals("")) {
                                 if (FunAlone.isChecked()) {
                                     if (!FunStartTime.getText().toString().equals("开始时间") && !FunEndTime.getText().toString().equals("结束时间")) {
-                                        dbUtils.DBUtilsPut(WarningTitle.getText().toString(),WarningGroup,WarningStudent.getText().toString(),FunCheck,
+                                        UpLod(WarningTitle.getText().toString(),WarningGroup,WarningStudent.getText().toString(),FunCheck,
                                                 FunStartTime.getText().toString(), FunEndTime.getText().toString(), BeiZhuEd.getText().toString());
                                         Looper.prepare();
                                         Toast.makeText(getApplicationContext(), "录入成功！", Toast.LENGTH_SHORT).show();
@@ -159,7 +163,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
                                     }
 
                                 } else {
-                                    dbUtils.DBUtilsPut(WarningTitle.getText().toString(),WarningGroup,WarningStudent.getText().toString(),FunCheck,
+                                    UpLod(WarningTitle.getText().toString(),WarningGroup,WarningStudent.getText().toString(),FunCheck,
                                             " ", " ", BeiZhuEd.getText().toString());
                                     Looper.prepare();
                                     Toast.makeText(getApplicationContext(), "录入成功！", Toast.LENGTH_SHORT).show();
@@ -173,7 +177,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
                             }else if(!WarningGroup.equals("") && !FunOtherText.getText().toString().equals("") &&
                                     !WarningTitle.getText().toString().equals("") && !WarningStudent.getText().toString().equals("")
                             && !FunCheck.equals("回家反省") && !FunCheck.equals("走读")) {
-                                dbUtils.DBUtilsPut(WarningTitle.getText().toString(),WarningGroup
+                                UpLod(WarningTitle.getText().toString(),WarningGroup
                                         ,WarningStudent.getText().toString(),FunOtherText.getText().toString(),
                                         " ", " ", BeiZhuEd.getText().toString());
                                 Looper.prepare();
@@ -235,6 +239,31 @@ public class ClassWarringUpLoad extends AppCompatActivity{
                 FunCheck = "走读";
             }
         });
+
+    }
+
+    public void UpLod(String Title, String WarningGroup, String WarningStudent, String WarningFun, String FunStartTime, String FunEndTime, String BeizhuSS) {
+        getDataJson getDataJson = new getDataJson();
+
+        SimpleDateFormat dff = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        dff.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        String ee = dff.format(new Date());
+        // 获取日期
+
+        String sql1 = "INSERT INTO WarringA VALUES(null,'" + Title +"','" + WarningGroup + "','" + WarningStudent +"','" + WarningFun +"','" +
+                FunStartTime +"','" + FunEndTime +"','" + BeizhuSS + "','" + ee + "');";
+        getDataJson.getDataJson(sql1);
+        String sql2 = "SELECT * FROM WarningTotal;";
+        try {
+            JSONArray jsonArray = new JSONArray(getDataJson.getDataJson(sql2));
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            int geta = jsonObject.getInt("WarningTotal") + 1;
+            String sql3 = "UPDATE WarningTotal SET WarningTotal=" + geta +";";
+            getDataJson.getDataJson(sql3);
+        } catch (Exception e) {
+
+        }
+
 
     }
 

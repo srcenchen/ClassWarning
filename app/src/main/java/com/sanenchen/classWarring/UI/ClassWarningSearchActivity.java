@@ -15,9 +15,13 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.sanenchen.classWarring.GetMysqlData.getDataJson;
 import com.sanenchen.classWarring.ItemAdapter;
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.WarningSearchAd;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,6 +38,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
     static String[] WarningTitle = null;
     static String[] WarningStudent = null;
     static String[] WarningID = null;
+    static String[] WarningDate = null;
     private List<WarningSearchAd> SearchList = new ArrayList<>();
     ProgressDialog progressDialog = null;
     ItemAdapter itemAdapter = null;
@@ -73,7 +78,27 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        DBUtilsGet(query1);
+                        char fir = query1.charAt(0);
+                        getDataJson getDataJson = new getDataJson();
+                        String jsonData = getDataJson.getDataJson("SELECT * FROM WarringA WHERE WarringStudent LIKE '%" + fir + "%'");
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(jsonData);
+                            HowMany = jsonArray.length();
+                            WarningTitle = new String[HowMany];
+                            WarningStudent = new String[HowMany];
+                            WarningID = new String[HowMany];
+                            WarningDate = new String[HowMany];
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                WarningTitle[i] = jsonObject.getString("WarringT");
+                                WarningStudent[i] = jsonObject.getString("WarringStudent");
+                                WarningID[i] = jsonObject.getString("id");
+                                WarningDate[i] = jsonObject.getString("uplodDate");
+                            }
+                        } catch (Exception e) {
+
+                        }
 
                         if (HowMany == 0) {
                             Looper.prepare();
@@ -86,7 +111,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
                         } else {
                             SearchList = new ArrayList<>();
                             for (int i = HowMany - 1; i >= 0; i--) {
-                                WarningSearchAd warningSearchAd = new WarningSearchAd(WarningTitle[i], WarningStudent[i], WarningID[i]);
+                                WarningSearchAd warningSearchAd = new WarningSearchAd(WarningTitle[i], WarningStudent[i], WarningID[i], WarningDate[i]);
                                 SearchList.add(warningSearchAd);
                             }
                             itemAdapter = new ItemAdapter(ClassWarningSearchActivity.this,
@@ -127,76 +152,4 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
             }
         }
     };
-
-    static final String USER = "classWarring";
-    static final String PASS = "classWarring";
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://182.92.87.134:3306/classWarring";
-
-    public void DBUtilsGet(String search) {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            // 注册 JDBC 驱动
-            Class.forName(JDBC_DRIVER);
-
-            // 打开链接
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            // 获取首个字符
-            char fir = search.charAt(0);
-
-            // 执行查询
-            stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT * FROM WarringA WHERE WarringStudent LIKE '%" + fir + "%'";
-            rs = stmt.executeQuery(sql);
-
-            HowMany = 0;
-            // 展开结果集数据库
-            while (rs.next()) {
-                rs.getString("WarringT");
-                HowMany++;
-            }
-            WarningTitle = new String[HowMany];
-            WarningStudent = new String[HowMany];
-            WarningID = new String[HowMany];
-
-            sql = "SELECT * FROM WarringA WHERE WarringStudent LIKE '%" + fir + "%'";
-            rs = stmt.executeQuery(sql);
-            int NowNumber = 0;
-            while (rs.next()) {
-                WarningTitle[NowNumber] = rs.getString("WarringT");
-                WarningStudent[NowNumber] = rs.getString("WarringStudent");
-                WarningID[NowNumber] = rs.getString("id");
-                NowNumber++;
-            }
-            //return rs;
-            rs.close();
-            stmt.close();
-            conn.close();
-
-        } catch (SQLException se) {
-            // 处理 JDBC 错误
-            se.printStackTrace();
-        } catch (Exception e) {
-            // 处理 Class.forName 错误
-            e.printStackTrace();
-        } finally {
-            // 关闭资源
-            try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException se2) {
-            }// 什么都不做
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        //return rs;
-    }
-
-
 }

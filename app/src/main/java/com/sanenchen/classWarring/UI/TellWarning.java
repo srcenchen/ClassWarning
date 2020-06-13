@@ -13,7 +13,11 @@ import android.os.Message;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sanenchen.classWarring.GetMysqlData.getDataJson;
 import com.sanenchen.classWarring.R;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,13 +46,30 @@ public class TellWarning extends AppCompatActivity {
         progressDialog.setTitle("加载数据中");
         progressDialog.setMessage("正在加载数据，请稍后...");
         progressDialog.setCancelable(false);
-        progressDialog.show();
+        //progressDialog.show();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                DBUtilsGet();
+                getDataJson getDataJson = new getDataJson();
+                String jsonData = getDataJson.getDataJson("SELECT * FROM WarringA WHERE id=" + MysqlID);
+
+                try {
+                    JSONArray jsonArray = new JSONArray(jsonData);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        TitleSt = jsonObject.getString("WarringT");
+                        ItemWarnSt = jsonObject.getString("WarringWhat");
+                        StudentSt = jsonObject.getString("WarringStudent");
+                        FunSt = jsonObject.getString("HowToWarring");
+                        TimeSt = jsonObject.getString("StartAlone") + "至" + jsonObject.getString("EndAlone");
+                        BeizhuSt = jsonObject.getString("Beizhu");
+                    }
+                } catch (Exception e) {
+
+                }
+
                 Message message = new Message();
                 message.what = ListViewSet;
                 handler.sendMessage(message);
@@ -91,64 +112,4 @@ public class TellWarning extends AppCompatActivity {
             }
         }
     };
-    static final String USER = "classWarring";
-    static final String PASS = "classWarring";
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://182.92.87.134:3306/classWarring";
-
-    public void DBUtilsGet() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            // 注册 JDBC 驱动
-            Class.forName(JDBC_DRIVER);
-
-            // 打开链接
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-
-            // 执行查询
-            stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT * FROM WarringA WHERE id=" + MysqlID;
-            rs = stmt.executeQuery(sql);
-
-            // 展开结果集数据库
-            while (rs.next()) {
-                TitleSt = rs.getString("WarringT");
-                ItemWarnSt = rs.getString("WarringWhat");
-                StudentSt = rs.getString("WarringStudent");
-                FunSt = rs.getString("HowToWarring");
-                TimeSt = rs.getString("StartAlone") + "至" + rs.getString("EndAlone");
-                BeizhuSt = rs.getString("Beizhu");
-            }
-            //return rs;
-            rs.close();
-            stmt.close();
-            conn.close();
-
-        } catch (SQLException se) {
-            // 处理 JDBC 错误
-            se.printStackTrace();
-        } catch (Exception e) {
-            // 处理 Class.forName 错误
-            e.printStackTrace();
-        } finally {
-            // 关闭资源
-            try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException se2) {
-            }// 什么都不做
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        //return rs;
-    }
-
-
-
 }

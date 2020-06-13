@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="5sp"
     android:orientation="vertical"
     tools:context=".UI.LoginActivity">
 
@@ -77,12 +78,21 @@
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40sp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
         android:background="@color/colorPrimary"
         android:text="登录"
         android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginTop="10sp"
+        android:text="Version：0.0.3"
+        android:textColor="#000000" />
 
 </LinearLayout>

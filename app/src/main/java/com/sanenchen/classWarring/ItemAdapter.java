@@ -21,8 +21,10 @@ public class ItemAdapter extends ArrayAdapter<WarningSearchAd> {
         View view = LayoutInflater.from(getContext()).inflate(resource, parent, false);
         TextView Title = view.findViewById(R.id.Title);
         TextView Student = view.findViewById(R.id.Student);
+        TextView UpLodDate = view.findViewById(R.id.UplodDate);
         Title.setText(warningSearchAd.getTitle());
         Student.setText("涉事学生：" + warningSearchAd.getStudent());
+        UpLodDate.setText("上报时间：" +  warningSearchAd.getUplodDate());
         return view;
     }
 }

@@ -19,7 +19,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sanenchen.classWarring.ClassWarringUpLoad;
+import com.sanenchen.classWarring.GetMysqlData.getDataJson;
 import com.sanenchen.classWarring.R;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -43,12 +47,21 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setTitle("加载数据中");
         progressDialog.setMessage("正在加载数据，请稍候...");
         progressDialog.setCancelable(false);
-        progressDialog.show();
+        //progressDialog.show();
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                DBUtilsGet();
+                getDataJson getDataJson = new getDataJson();
+                String jsonData = getDataJson.getDataJson("SELECT * FROM WarningTotal");
+
+                try {
+                    JSONArray jsonArray = new JSONArray(jsonData);
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    geta = jsonObject.getString("WarningTotal");
+                } catch (Exception e) {
+
+                }
                 Message message = new Message();
                 message.what = 1;
                 handler.sendMessage(message);
@@ -78,12 +91,21 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setTitle("加载数据中");
         progressDialog.setMessage("正在加载数据，请稍候...");
         progressDialog.setCancelable(false);
-        progressDialog.show();
+        //progressDialog.show();
         new Thread(new Runnable() {
             @Override
             public void run() {
+                getDataJson getDataJson = new getDataJson();
+                String jsonData = getDataJson.getDataJson("SELECT * FROM WarningTotal");
 
-                DBUtilsGet();
+                try {
+                    JSONArray jsonArray = new JSONArray(jsonData);
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    int TotalNum = jsonObject.getInt("WarningTotal") + 1;
+
+                } catch (Exception e) {
+
+                }
                 Message message = new Message();
                 message.what = 1;
                 handler.sendMessage(message);
@@ -104,59 +126,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     });
-    static final String USER = "classWarring";
-    static final String PASS = "classWarring";
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://182.92.87.134:3306/classWarring";
-
-    public void DBUtilsGet() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            // 注册 JDBC 驱动
-            Class.forName(JDBC_DRIVER);
-
-            // 打开链接
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-
-            // 执行查询
-            stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT * FROM WarningTotal";
-            rs = stmt.executeQuery(sql);
-
-            // 展开结果集数据库
-            while (rs.next()) {
-                geta = rs.getString("WarningTotal");
-            }
-            //return rs;
-            rs.close();
-            stmt.close();
-            conn.close();
-
-        } catch (SQLException se) {
-            // 处理 JDBC 错误
-            se.printStackTrace();
-        } catch (Exception e) {
-            // 处理 Class.forName 错误
-            e.printStackTrace();
-        } finally {
-            // 关闭资源
-            try {
-                if (stmt != null) stmt.close();
-            } catch (SQLException se2) {
-            }// 什么都不做
-            try {
-                if (conn != null) conn.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-        //return rs;
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

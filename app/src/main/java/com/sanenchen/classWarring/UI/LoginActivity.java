@@ -16,8 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.sanenchen.classWarring.GetMysqlData.getDataJson;
 import com.sanenchen.classWarring.R;
-import com.sanenchen.classWarring.Sql.DBUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     final int LoginERRORInternet = 3;
     String userName;
     ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,18 +53,43 @@ public class LoginActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        DBUtils dbUtils = new DBUtils();
-                        String repliedInfo = dbUtils.CheckLoginInfoDB(getUser.getText().toString(), getPassword.getText().toString());
-                        if(repliedInfo.equals("0")) {
+//                        DBUtils dbUtils = new DBUtils();
+                        //                      String repliedInfo = dbUtils.CheckLoginInfoDB(getUser.getText().toString(), getPassword.getText().toString());
+
+                        getDataJson getDataJson = new getDataJson();
+                        String jsonData = getDataJson.getDataJson("SELECT * FROM UserTable WHERE userName='" + getUser.getText().toString() + "'");
+
+                        String repliedInfo = "LoginERRORInternet";
+                        try {
+                            if (jsonData == "") {
+                                repliedInfo = "LoginERRORInternet";
+                            }
+                            JSONArray jsonArray = new JSONArray(jsonData);
+                            if (jsonArray.length() == 0) {
+                                repliedInfo = "LoginERRORUserOrPassWord";
+                            } else {
+                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                                String PassWordBase64 = Base64.encodeToString(getPassword.getText().toString().getBytes(), Base64.DEFAULT).replace("\n","");
+                                if (jsonObject.getString("passWord").equals(PassWordBase64)) {
+                                    repliedInfo = "LoginRight";
+                                    userName = getUser.getText().toString();
+                                } else {
+                                    repliedInfo = "LoginERRORUserOrPassWord";
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (repliedInfo.equals("LoginERRORUserOrPassWord")) {
                             Message message = new Message();
                             message.what = LoginERRORUserOrPassWord;
                             handler.sendMessage(message);
-                        } else if(repliedInfo.equals("3")){
+                        } else if (repliedInfo.equals("LoginERRORInternet")) {
                             Message message = new Message();
                             message.what = LoginERRORInternet;
                             handler.sendMessage(message);
-                        } else {
-                            userName = repliedInfo;
+                        } else if (repliedInfo.equals("LoginRight")){
                             Message message = new Message();
                             message.what = LoginRight;
                             handler.sendMessage(message);
@@ -83,11 +113,11 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                     break;
                 case LoginERRORUserOrPassWord:
-                    Toast.makeText(LoginActivity.this,"登录失败，用户名或密码错误！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "登录失败，用户名或密码错误！", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                     break;
                 case LoginERRORInternet:
-                    Toast.makeText(LoginActivity.this,"登录失败，网络错误！", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "登录失败，网络错误！", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                     break;
             }
