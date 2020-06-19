@@ -14,19 +14,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.sanenchen.classWarring.GetMysqlData.getDataJson;
+import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.ItemAdapter;
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.WarningSearchAd;
+import com.sanenchen.classWarring.getThings.getLinkID;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +67,7 @@ public class AllWarningActivity extends AppCompatActivity {
             public void run() {
 
                 getDataJson getDataJson = new getDataJson();
-                String jsonData = getDataJson.getDataJson("SELECT * FROM WarringA");
+                String jsonData = getDataJson.getSearchReply("0",AllWarningActivity.this, null, null);
 
                 try {
                     JSONArray jsonArray = new JSONArray(jsonData);

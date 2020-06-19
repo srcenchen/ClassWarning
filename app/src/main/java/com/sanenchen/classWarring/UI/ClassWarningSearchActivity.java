@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.sanenchen.classWarring.GetMysqlData.getDataJson;
+import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.ItemAdapter;
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.WarningSearchAd;
@@ -23,11 +23,6 @@ import com.sanenchen.classWarring.WarningSearchAd;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +75,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
 
                         char fir = query1.charAt(0);
                         getDataJson getDataJson = new getDataJson();
-                        String jsonData = getDataJson.getDataJson("SELECT * FROM WarringA WHERE WarringStudent LIKE '%" + fir + "%'");
+                        String jsonData = getDataJson.getSearchReply("3", ClassWarningSearchActivity.this, null, fir+"");
 
                         try {
                             JSONArray jsonArray = new JSONArray(jsonData);

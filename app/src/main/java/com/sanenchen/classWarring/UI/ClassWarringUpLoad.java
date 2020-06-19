@@ -1,7 +1,6 @@
-package com.sanenchen.classWarring;
+package com.sanenchen.classWarring.UI;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,17 +19,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sanenchen.classWarring.GetMysqlData.getDataJson;
+import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.getThings.getDataJson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.TimeZone;
 
 public class ClassWarringUpLoad extends AppCompatActivity{
@@ -249,17 +247,12 @@ public class ClassWarringUpLoad extends AppCompatActivity{
         dff.setTimeZone(TimeZone.getTimeZone("GMT+08"));
         String ee = dff.format(new Date());
         // 获取日期
-
-        String sql1 = "INSERT INTO WarringA VALUES(null,'" + Title +"','" + WarningGroup + "','" + WarningStudent +"','" + WarningFun +"','" +
-                FunStartTime +"','" + FunEndTime +"','" + BeizhuSS + "','" + ee + "');";
-        getDataJson.getDataJson(sql1);
-        String sql2 = "SELECT * FROM WarningTotal;";
         try {
-            JSONArray jsonArray = new JSONArray(getDataJson.getDataJson(sql2));
+            String jsonData = getDataJson.getSearchReply("1", ClassWarringUpLoad.this, null, null);
+            JSONArray jsonArray = new JSONArray(jsonData);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             int geta = jsonObject.getInt("WarningTotal") + 1;
-            String sql3 = "UPDATE WarningTotal SET WarningTotal=" + geta +";";
-            getDataJson.getDataJson(sql3);
+            getDataJson.getAddWarnReply(Title, WarningGroup, WarningStudent, WarningFun, FunStartTime, FunEndTime, BeizhuSS, ee, geta, ClassWarringUpLoad.this);
         } catch (Exception e) {
 
         }

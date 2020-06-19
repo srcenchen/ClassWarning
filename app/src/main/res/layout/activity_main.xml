@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10sp"
-                android:text="Version：0.0.3"
+                android:text="Version：0.0.4"
                 android:textColor="#000000" />
 
         </LinearLayout>

@@ -13,17 +13,11 @@ import android.os.Message;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sanenchen.classWarring.GetMysqlData.getDataJson;
+import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TellWarning extends AppCompatActivity {
 
@@ -53,7 +47,7 @@ public class TellWarning extends AppCompatActivity {
             public void run() {
 
                 getDataJson getDataJson = new getDataJson();
-                String jsonData = getDataJson.getDataJson("SELECT * FROM WarringA WHERE id=" + MysqlID);
+                String jsonData = getDataJson.getSearchReply("2", null, MysqlID, null);
 
                 try {
                     JSONArray jsonArray = new JSONArray(jsonData);

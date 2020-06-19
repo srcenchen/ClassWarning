@@ -6,18 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.sanenchen.classWarring.GetMysqlData.getDataJson;
+import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.libs.SHA224;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     final int LoginERRORInternet = 3;
     String userName;
     ProgressDialog progressDialog;
+    String GetUser = null;
+    String GetPassword = null;
+    String LinkID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,17 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("正在登录，请稍候...");
         progressDialog.setCancelable(false);
 
+        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+        String user = preferences.getString("user", null);
+
+        if (user != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("userName", user);
+            intent.putExtra("Sign", "No");
+            startActivity(intent);
+            finish();
+        }
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -57,7 +71,10 @@ public class LoginActivity extends AppCompatActivity {
                         //                      String repliedInfo = dbUtils.CheckLoginInfoDB(getUser.getText().toString(), getPassword.getText().toString());
 
                         getDataJson getDataJson = new getDataJson();
-                        String jsonData = getDataJson.getDataJson("SELECT * FROM UserTable WHERE userName='" + getUser.getText().toString() + "'");
+                        String jsonData = getDataJson.getLoginPassword(getUser.getText().toString());
+
+                        GetUser = getUser.getText().toString();
+                        GetPassword = getPassword.getText().toString();
 
                         String repliedInfo = "LoginERRORInternet";
                         try {
@@ -69,10 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                                 repliedInfo = "LoginERRORUserOrPassWord";
                             } else {
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                String PassWordBase64 = Base64.encodeToString(getPassword.getText().toString().getBytes(), Base64.DEFAULT).replace("\n","");
+                                String PassWordBase64 = SHA224.Sha224_reply(getPassword.getText().toString());
                                 if (jsonObject.getString("passWord").equals(PassWordBase64)) {
                                     repliedInfo = "LoginRight";
                                     userName = getUser.getText().toString();
+                                    LinkID = jsonObject.getString("LinkID");
                                 } else {
                                     repliedInfo = "LoginERRORUserOrPassWord";
                                 }
@@ -108,7 +126,14 @@ public class LoginActivity extends AppCompatActivity {
                 case LoginRight:
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("userName", userName);
+                    intent.putExtra("Sign", "Yes");
                     startActivity(intent);
+                    SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.putString("user", GetUser);
+                    editor.putString("password", GetPassword);
+                    editor.putString("LinkID", LinkID);
+                    editor.apply();
                     progressDialog.dismiss();
                     finish();
                     break;

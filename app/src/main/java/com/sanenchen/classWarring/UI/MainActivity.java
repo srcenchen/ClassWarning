@@ -6,35 +6,32 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
-import android.text.style.ClickableSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.sanenchen.classWarring.ClassWarringUpLoad;
-import com.sanenchen.classWarring.GetMysqlData.getDataJson;
+import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.libs.SHA224;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity {
 
     String geta = null;
     ProgressDialog progressDialog;
+    String GetUser = null;
+    String GetPassword = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +48,8 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
                 getDataJson getDataJson = new getDataJson();
-                String jsonData = getDataJson.getDataJson("SELECT * FROM WarningTotal");
+                String jsonData = getDataJson.getSearchReply("1", MainActivity.this, null, null);
 
                 try {
                     JSONArray jsonArray = new JSONArray(jsonData);
@@ -68,15 +64,54 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         TextView idUser = findViewById(R.id.idUser);
         idUser.setText(intent.getStringExtra("userName"));
 
-        Button exitLoginButton =findViewById(R.id.exitLoginButton);
+        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+        String user = preferences.getString("user", null);
+        String password = preferences.getString("password", null);
+
+        if (intent.getStringExtra("Sign").equals("No")) {
+            GetUser = user;
+            GetPassword = password;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+//                        DBUtils dbUtils = new DBUtils();
+                    //                      String repliedInfo = dbUtils.CheckLoginInfoDB(getUser.getText().toString(), getPassword.getText().toString());
+
+                    getDataJson getDataJson = new getDataJson();
+                    String jsonData = getDataJson.getLoginPassword(GetUser);
+
+                    try {
+                        JSONArray jsonArray = new JSONArray(jsonData);
+                        if (jsonArray.length() == 0) {
+                            Looper.prepare();
+                            Toast.makeText(MainActivity.this, "登录身份过期，请重新登录！", Toast.LENGTH_SHORT).show();
+
+                            Message message = new Message();
+                            message.what = 2;
+                            handler.sendMessage(message);
+                            Looper.loop();
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+
+        Button exitLoginButton = findViewById(R.id.exitLoginButton);
         exitLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                editor.clear();
+                editor.apply();
                 startActivity(intent);
                 finish();
             }
@@ -95,20 +130,52 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 getDataJson getDataJson = new getDataJson();
-                String jsonData = getDataJson.getDataJson("SELECT * FROM WarningTotal");
+                String jsonData = getDataJson.getSearchReply("1", MainActivity.this, null, null);
 
                 try {
                     JSONArray jsonArray = new JSONArray(jsonData);
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
-                    int TotalNum = jsonObject.getInt("WarningTotal") + 1;
-
+                    geta = jsonObject.getString("WarningTotal");
                 } catch (Exception e) {
 
                 }
                 Message message = new Message();
                 message.what = 1;
                 handler.sendMessage(message);
+            }
+        }).start();
+
+        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+        String user = preferences.getString("user", null);
+        String password = preferences.getString("password", null);
+
+        GetUser = user;
+        GetPassword = password;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+//                        DBUtils dbUtils = new DBUtils();
+                //                      String repliedInfo = dbUtils.CheckLoginInfoDB(getUser.getText().toString(), getPassword.getText().toString());
+
+                getDataJson getDataJson = new getDataJson();
+                String jsonData = getDataJson.getLoginPassword(GetUser);
+
+                try {
+                    JSONArray jsonArray = new JSONArray(jsonData);
+                    if (jsonArray.length() == 0) {
+                        Looper.prepare();
+                        Toast.makeText(MainActivity.this, "登录身份过期，请重新登录！", Toast.LENGTH_SHORT).show();
+
+                        Message message = new Message();
+                        message.what = 2;
+                        handler.sendMessage(message);
+                        Looper.loop();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }
@@ -121,6 +188,14 @@ public class MainActivity extends AppCompatActivity {
                     TextView cishu = findViewById(R.id.cishu);
                     cishu.setText(geta + "次");
                     progressDialog.dismiss();
+                    break;
+                case 2:
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.apply();
+                    startActivity(intent);
+                    finish();
                     break;
             }
             return true;
