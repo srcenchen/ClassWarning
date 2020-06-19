@@ -11,20 +11,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class getDataJson {
-    public String getDataJson(String sql) {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/selectSQL?sql=" + sql).build();
-        try {
-            Response response = client.newCall(request).execute();
-            String ReData = response.body().string();
-            return ReData;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "";
-    }
-
     public String getLoginPassword(String user) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/loginSign?user=" + user).build();
