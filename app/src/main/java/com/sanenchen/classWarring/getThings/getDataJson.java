@@ -1,6 +1,7 @@
 package com.sanenchen.classWarring.getThings;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.sanenchen.classWarring.UI.AllWarningActivity;
 
@@ -62,6 +63,23 @@ public class getDataJson {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "";
+    }
+
+    public String getAddUserReply(String user, String password, String linkid, String HowToCall) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/addUser?user=" + user +
+                "&password=" + password + "&linkid=" + linkid +
+                "&howToCall=" + HowToCall).build();
+        try {
+            Response response = client.newCall(request).execute();
+            String ReData = response.body().string();
+            Log.i("aaa", ReData);
+            return ReData;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return "";
     }
 }

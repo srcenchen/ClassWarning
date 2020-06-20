@@ -12,19 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".UI.NewUserActivity"></activity>
         <activity android:name=".UI.LoginActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".UI.AllWarningActivity" />
         <activity android:name=".UI.TellWarning" />
         <activity android:name=".UI.ClassWarningSearchActivity" />
         <activity android:name=".UI.ClassWarringUpLoad" />
-        <activity android:name=".UI.MainActivity"/>
+        <activity android:name=".UI.MainActivity" />
     </application>
 
 </manifest>

@@ -92,7 +92,7 @@ public class AllWarningActivity extends AppCompatActivity {
                 if (HowMany == 0) {
                     Looper.prepare();
 
-                    Toast.makeText(AllWarningActivity.this, "未找到！！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AllWarningActivity.this, "没有违纪信息可显示", Toast.LENGTH_SHORT).show();
                     Message message = new Message();
                     message.what = 2;
                     handler.sendMessage(message);

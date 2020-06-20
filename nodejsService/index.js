@@ -25,7 +25,6 @@ http.createServer(function (req, res) {
             if (err) {
                 console.log('[SELECT ERROR] - ', err.message);
                 res.end("SQL语句错误！");
-                return;
             }
             var str = JSON.stringify(result);
             res.end(str);
@@ -44,7 +43,6 @@ http.createServer(function (req, res) {
                 if (err) {
                     console.log('[SELECT ERROR] - ', err.message);
                     res.end("SQL语句错误！");
-                    return;
                 }
                 var str = JSON.stringify(result);
                 res.end(str);
@@ -54,7 +52,6 @@ http.createServer(function (req, res) {
                 if (err) {
                     console.log('[SELECT ERROR] - ', err.message);
                     res.end("SQL语句错误！");
-                    return;
                 }
                 var str = JSON.stringify(result);
                 res.end(str);
@@ -65,19 +62,16 @@ http.createServer(function (req, res) {
                 if (err) {
                     console.log('[SELECT ERROR] - ', err.message);
                     res.end("SQL语句错误！");
-                    return;
                 }
                 var str = JSON.stringify(result);
                 res.end(str);
             });
-        }
-        else if (messagewhat == "3") {
+        } else if (messagewhat == "3") {
             connection.query("SELECT * FROM WarringA WHERE LinkID='"+ linkID +"' and WarringStudent LIKE '%"+ FirstNa +"%'", function (err, result) {
                 if (err) {
                     console.log('[SELECT ERROR] - ', err.message);
                     res.write(FirstNa);
                     res.end("SQL语句错误！");
-                    return;
                 }
                 var str = JSON.stringify(result);
                 res.end(str);
@@ -102,7 +96,6 @@ http.createServer(function (req, res) {
             if (err) {
                 console.log('[SELECT ERROR] - ', err.message);
                 res.end("SQL语句错误！");
-                return;
             }
             var str = JSON.stringify(result);
             res.end(str);
@@ -111,10 +104,29 @@ http.createServer(function (req, res) {
             if (err) {
                 console.log('[SELECT ERROR] - ', err.message);
                 res.end("SQL语句错误！");
-                return;
             }
             var str = JSON.stringify(result);
             res.end(str);
+        });
+    } else if (params == "/addUser") {
+        var params = url.parse(req.url, true).query;
+        var user = params.user;
+        var password = params.password;
+        var linkid = params.linkid;
+        var howToCall = params.howToCall;
+
+        connection.query("INSERT INTO UserTable VALUES (null, '" + user + "','" + password + "','" + howToCall + "','"+ linkid + "')", function (err, result) {
+            if (err) {
+                console.log('[SELECT ERROR] - ', err.message);
+                res.end("SQL语句错误！");
+            }
+        });
+        connection.query("INSERT INTO WarningTotal VALUES ('0','" + linkid + "')", function (err, result) {
+            if (err) {
+                console.log('[SELECT ERROR] - ', err.message);
+                res.end("SQL语句错误！");
+            }
+            res.end("注册成功!");
         });
     } else {
         res.end("未定义的GET请求！")

@@ -42,6 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
         final EditText getUser = findViewById(R.id.getUser);
         final EditText getPassword = findViewById(R.id.getPassword);
+        final Button NewUserButton = findViewById(R.id.NewUserButton);
+        NewUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, NewUserActivity.class);
+                startActivity(intent);
+            }
+        });
 
         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setTitle("登录中");
