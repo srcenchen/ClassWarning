@@ -21,11 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.AllWarningActivity" />
         <activity android:name=".UI.TellWarning" />
         <activity android:name=".UI.ClassWarningSearchActivity" />
-        <activity android:name=".UI.ClassWarringUpLoad" />
-        <activity android:name=".UI.MainActivity" />
     </application>
 
 </manifest>
