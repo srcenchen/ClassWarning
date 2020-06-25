@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         String user = preferences.getString("user", null);
 
         if (user != null) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, TabActivity.class);
             intent.putExtra("userName", user);
             intent.putExtra("Sign", "No");
             startActivity(intent);
@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case LoginRight:
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, TabActivity.class);
                     intent.putExtra("userName", userName);
                     intent.putExtra("Sign", "Yes");
                     startActivity(intent);

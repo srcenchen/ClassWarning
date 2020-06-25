@@ -1,8 +1,10 @@
 package com.sanenchen.classWarring.UI;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -12,7 +14,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -31,37 +35,38 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class ClassWarringUpLoad extends AppCompatActivity{
+public class ClassWarringUpLoad extends Fragment {
 
     String FunCheck = "";
     ProgressDialog progressDialog = null;
+    View viewThis;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_class_warring_up_load);
-        RadioButton FunOther = findViewById(R.id.FunOther);
-        final RadioButton FunAlone = findViewById(R.id.FunAlone);
-        RadioButton FunGoHome = findViewById(R.id.FunGoHome);
-        final Button FunStartTime = findViewById(R.id.FunStartTime);
-        final Button FunEndTime = findViewById(R.id.FunEndTime);
-        final LinearLayout linearLayout1 = findViewById(R.id.GoHomePanel);
-        Button InButton = findViewById(R.id.InButton);
-        final EditText WarningTitle = findViewById(R.id.WarningTitle);
-        final EditText WarningStudent = findViewById(R.id.WarningStudent);
-        final CheckBox WarningTalk = findViewById(R.id.WarningTalk);
-        final CheckBox WarningPa = findViewById(R.id.WarningPa);
-        final CheckBox WarningSit = findViewById(R.id.WarningSit);
-        final CheckBox WarningOther = findViewById(R.id.WarningOther);
-        Toolbar toolbar = findViewById(R.id.toolbar5);
-        final EditText BeiZhuEd = findViewById(R.id.Beizhu);
-        setSupportActionBar(toolbar);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_class_warring_up_load, container, false);
+        viewThis = view;
+        RadioButton FunOther = viewThis.findViewById(R.id.FunOther);
+        final RadioButton FunAlone = viewThis.findViewById(R.id.FunAlone);
+        RadioButton FunGoHome = viewThis.findViewById(R.id.FunGoHome);
+        final Button FunStartTime = viewThis.findViewById(R.id.FunStartTime);
+        final Button FunEndTime = viewThis.findViewById(R.id.FunEndTime);
+        final LinearLayout linearLayout1 = viewThis.findViewById(R.id.GoHomePanel);
+        Button InButton = viewThis.findViewById(R.id.InButton);
+        final EditText WarningTitle = viewThis.findViewById(R.id.WarningTitle);
+        final EditText WarningStudent = viewThis.findViewById(R.id.WarningStudent);
+        final CheckBox WarningTalk = viewThis.findViewById(R.id.WarningTalk);
+        final CheckBox WarningPa = viewThis.findViewById(R.id.WarningPa);
+        final CheckBox WarningSit = viewThis.findViewById(R.id.WarningSit);
+        final CheckBox WarningOther = viewThis.findViewById(R.id.WarningOther);
+        final EditText BeiZhuEd = viewThis.findViewById(R.id.Beizhu);
 
         // Button
         FunStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ClassWarringUpLoad.this);
-                View dialogView = View.inflate(ClassWarringUpLoad.this, R.layout.dialog_date, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                View dialogView = View.inflate(getActivity(), R.layout.dialog_date, null);
                 final DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.datePicker);
                 builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
                     @SuppressLint("SetTextI18n")
@@ -87,8 +92,8 @@ public class ClassWarringUpLoad extends AppCompatActivity{
         FunEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ClassWarringUpLoad.this);
-                View dialogView = View.inflate(ClassWarringUpLoad.this, R.layout.dialog_date, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                View dialogView = View.inflate(getActivity(), R.layout.dialog_date, null);
                 final DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.datePicker);
                 builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
                     @SuppressLint("SetTextI18n")
@@ -115,7 +120,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
 
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(ClassWarringUpLoad.this);
+                progressDialog = new ProgressDialog(getActivity());
                 progressDialog.setTitle("录入中");
                 progressDialog.setMessage("正在录入，请稍后...");
                 progressDialog.setCancelable(false);
@@ -139,21 +144,21 @@ public class ClassWarringUpLoad extends AppCompatActivity{
 
                         }
                         try {
-                            EditText FunOtherText = findViewById(R.id.FunOtherText);
+                            EditText FunOtherText = viewThis.findViewById(R.id.FunOtherText);
                             if (!WarningGroup.equals("") && !FunCheck.equals("") && !WarningTitle.getText().toString().equals("") && !WarningStudent.getText().toString().equals("")) {
                                 if (FunAlone.isChecked()) {
                                     if (!FunStartTime.getText().toString().equals("开始时间") && !FunEndTime.getText().toString().equals("结束时间")) {
                                         UpLod(WarningTitle.getText().toString(),WarningGroup,WarningStudent.getText().toString(),FunCheck,
                                                 FunStartTime.getText().toString(), FunEndTime.getText().toString(), BeiZhuEd.getText().toString());
                                         Looper.prepare();
-                                        Toast.makeText(getApplicationContext(), "录入成功！", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), "录入成功！", Toast.LENGTH_SHORT).show();
                                         Message message = new Message();
                                         message.what = 1;
                                         handler.sendMessage(message);
                                         Looper.loop();
                                     } else {
                                         Looper.prepare();
-                                        Toast.makeText(getApplicationContext(), "有东西是不是忘记选/填啦？", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), "有东西是不是忘记选/填啦？", Toast.LENGTH_SHORT).show();
                                         Message message = new Message();
                                         message.what = 2;
                                         handler.sendMessage(message);
@@ -164,7 +169,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
                                     UpLod(WarningTitle.getText().toString(),WarningGroup,WarningStudent.getText().toString(),FunCheck,
                                             " ", " ", BeiZhuEd.getText().toString());
                                     Looper.prepare();
-                                    Toast.makeText(getApplicationContext(), "录入成功！", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "录入成功！", Toast.LENGTH_SHORT).show();
                                     Message message = new Message();
                                     message.what = 1;
                                     handler.sendMessage(message);
@@ -174,12 +179,12 @@ public class ClassWarringUpLoad extends AppCompatActivity{
 
                             }else if(!WarningGroup.equals("") && !FunOtherText.getText().toString().equals("") &&
                                     !WarningTitle.getText().toString().equals("") && !WarningStudent.getText().toString().equals("")
-                            && !FunCheck.equals("回家反省") && !FunCheck.equals("走读")) {
+                                    && !FunCheck.equals("回家反省") && !FunCheck.equals("走读")) {
                                 UpLod(WarningTitle.getText().toString(),WarningGroup
                                         ,WarningStudent.getText().toString(),FunOtherText.getText().toString(),
                                         " ", " ", BeiZhuEd.getText().toString());
                                 Looper.prepare();
-                                Toast.makeText(getApplicationContext(), "录入成功！", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "录入成功！", Toast.LENGTH_SHORT).show();
                                 Message message = new Message();
                                 message.what = 1;
                                 handler.sendMessage(message);
@@ -188,7 +193,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
                             } else {
                                 //Toast.makeText(ClassWarringUpLoad.class, "", Toast.LENGTH_SHORT).show();
                                 Looper.prepare();
-                                Toast.makeText(getApplicationContext(), "有东西是不是忘记选/填啦？", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "有东西是不是忘记选/填啦？", Toast.LENGTH_SHORT).show();
                                 Message message = new Message();
                                 message.what = 2;
                                 handler.sendMessage(message);
@@ -197,7 +202,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
 
                         } catch (Exception e) {
                             Looper.prepare();
-                            Toast.makeText(getApplicationContext(), "录入失败，未知错误！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "录入失败，未知错误！", Toast.LENGTH_SHORT).show();
                             Message message = new Message();
                             message.what = 2;
                             handler.sendMessage(message);
@@ -213,7 +218,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
         FunOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText FunOtherText = findViewById(R.id.FunOtherText);
+                EditText FunOtherText = viewThis.findViewById(R.id.FunOtherText);
                 FunOtherText.setEnabled(true);
                 linearLayout1.setVisibility(View.GONE);
                 FunCheck = FunOtherText.getText().toString();
@@ -222,7 +227,7 @@ public class ClassWarringUpLoad extends AppCompatActivity{
         FunAlone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText FunOtherText = findViewById(R.id.FunOtherText);
+                EditText FunOtherText = viewThis.findViewById(R.id.FunOtherText);
                 FunOtherText.setEnabled(false);
                 linearLayout1.setVisibility(View.VISIBLE);
                 FunCheck = "回家反省";
@@ -231,12 +236,20 @@ public class ClassWarringUpLoad extends AppCompatActivity{
         FunGoHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText FunOtherText = findViewById(R.id.FunOtherText);
+                EditText FunOtherText = viewThis.findViewById(R.id.FunOtherText);
                 FunOtherText.setEnabled(false);
                 linearLayout1.setVisibility(View.GONE);
                 FunCheck = "走读";
             }
         });
+        return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -248,11 +261,11 @@ public class ClassWarringUpLoad extends AppCompatActivity{
         String ee = dff.format(new Date());
         // 获取日期
         try {
-            String jsonData = getDataJson.getSearchReply("1", ClassWarringUpLoad.this, null, null);
+            String jsonData = getDataJson.getSearchReply("1", getActivity(), null, null);
             JSONArray jsonArray = new JSONArray(jsonData);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             int geta = jsonObject.getInt("WarningTotal") + 1;
-            getDataJson.getAddWarnReply(Title, WarningGroup, WarningStudent, WarningFun, FunStartTime, FunEndTime, BeizhuSS, ee, geta, ClassWarringUpLoad.this);
+            getDataJson.getAddWarnReply(Title, WarningGroup, WarningStudent, WarningFun, FunStartTime, FunEndTime, BeizhuSS, ee, geta, getActivity());
         } catch (Exception e) {
 
         }
@@ -266,7 +279,6 @@ public class ClassWarringUpLoad extends AppCompatActivity{
             switch (msg.what) {
                 case 1:
                     progressDialog.dismiss();
-                    finish();
                     break;
                 case 2:
                     progressDialog.dismiss();

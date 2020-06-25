@@ -2,6 +2,8 @@ package com.sanenchen.classWarring.UI;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,8 +17,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.sanenchen.classWarring.ItemRAdapter;
 import com.sanenchen.classWarring.getThings.getDataJson;
-import com.sanenchen.classWarring.ItemAdapter;
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.WarningSearchAd;
 
@@ -28,6 +30,7 @@ import java.util.List;
 
 public class ClassWarningSearchActivity extends AppCompatActivity {
     String query1;
+    private List<WarningSearchAd> musicList = new ArrayList<>();
    // public String getT = null;
     static int HowMany = 0;
     static String[] WarningTitle = null;
@@ -36,9 +39,8 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
     static String[] WarningDate = null;
     private List<WarningSearchAd> SearchList = new ArrayList<>();
     ProgressDialog progressDialog = null;
-    ItemAdapter itemAdapter = null;
     public static final int ListViewSet = 1;
-    ListView listView = null;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +48,9 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
         SearchView searchView = findViewById(R.id.SearchView);
         searchView.onActionViewExpanded();
 
-
-        listView = findViewById(R.id.listView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                WarningSearchAd warningSearchAd = SearchList.get(position);
-                Intent intent = new Intent(ClassWarningSearchActivity.this, TellWarning.class);
-                intent.putExtra("MysqlID", warningSearchAd.getID());
-                startActivity(intent);
-            }
-        });
-
+        recyclerView = findViewById(R.id.listView2);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             //单机搜索按钮时激发该方法
@@ -107,10 +100,8 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
                             SearchList = new ArrayList<>();
                             for (int i = HowMany - 1; i >= 0; i--) {
                                 WarningSearchAd warningSearchAd = new WarningSearchAd(WarningTitle[i], WarningStudent[i], WarningID[i], WarningDate[i]);
-                                SearchList.add(warningSearchAd);
+                                musicList.add(warningSearchAd);
                             }
-                            itemAdapter = new ItemAdapter(ClassWarningSearchActivity.this,
-                                    R.layout.search_item, SearchList);
 
                             Message message = new Message();
                             message.what = ListViewSet;
@@ -138,7 +129,8 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case ListViewSet:
-                    listView.setAdapter(itemAdapter);
+                    ItemRAdapter adapter = new ItemRAdapter(musicList);
+                    recyclerView.setAdapter(adapter);
                     progressDialog.dismiss();
                     break;
                 case 2:
