@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".UI.AboutActivity"></activity>
+        <activity android:name=".Setting.SettingActivity" />
         <activity android:name=".UI.TabActivity" />
         <activity android:name=".UI.NewUserActivity" />
         <activity android:name=".UI.LoginActivity">

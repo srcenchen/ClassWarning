@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     final int LoginRight = 1;
@@ -33,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     String GetUser = null;
     String GetPassword = null;
     String LinkID = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 package com.sanenchen.classWarring.UI;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,6 +34,9 @@ public class TellWarning extends AppCompatActivity {
         setContentView(R.layout.activity_tell_warning);
         Toolbar toolbar = findViewById(R.id.toolbar4);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
 
         Intent intent = getIntent();
         MysqlID = intent.getStringExtra("MysqlID");
@@ -106,4 +111,12 @@ public class TellWarning extends AppCompatActivity {
             }
         }
     };
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+        }
+        return true;
+    }
 }

@@ -1,7 +1,9 @@
 package com.sanenchen.classWarring.UI;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -47,6 +50,11 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_classwarning_search);
         SearchView searchView = findViewById(R.id.SearchView);
         searchView.onActionViewExpanded();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
 
         recyclerView = findViewById(R.id.listView2);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -55,7 +63,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             //单机搜索按钮时激发该方法
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(final String query) {
                 query1 = query;
                 progressDialog = new ProgressDialog(ClassWarningSearchActivity.this);
                 progressDialog.setTitle("查询中");
@@ -91,7 +99,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
                         if (HowMany == 0) {
                             Looper.prepare();
 
-                            Toast.makeText(ClassWarningSearchActivity.this, "未找到！！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ClassWarningSearchActivity.this, "未找到有关" + query + "的信息", Toast.LENGTH_SHORT).show();
                             Message message = new Message();
                             message.what = 2;
                             handler.sendMessage(message);
@@ -122,6 +130,14 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+        }
+        return true;
     }
 
     private Handler handler = new Handler() {

@@ -65,7 +65,7 @@ public class ItemRAdapter extends RecyclerView.Adapter<ItemRAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         WarningSearchAd music = mMusicList.get(position);
         holder.Title.setText(music.getTitle());
-        holder.Student.setText(music.getStudent());
+        holder.Student.setText("学生：" + music.getStudent());
         holder.UpLodDate.setText(music.getUplodDate());
     }
 

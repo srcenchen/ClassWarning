@@ -4,16 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ClassWarningSearchActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".UI.ClassWarningSearchActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/toolbar_blue_theme"
+        app:titleTextColor="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="搜索违纪信息"
+            android:textColor="@color/icons"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
 
     <SearchView
         android:id="@+id/SearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:queryHint="请键入违纪学生以查询"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        android:queryHint="请键入违纪学生以查询">
+        tools:layout_editor_absoluteY="1dp">
 
     </SearchView>
 

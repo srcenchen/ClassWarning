@@ -9,8 +9,9 @@
     tools:context=".UI.AllWarningActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ListView"
+        android:id="@+id/RecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:overScrollMode="never"/>
 
 </LinearLayout>

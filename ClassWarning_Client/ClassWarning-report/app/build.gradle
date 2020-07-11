@@ -37,4 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation("com.squareup.okhttp3:okhttp:3.4.1")
     compile 'com.roughike:bottom-bar:2.0.2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    compile 'com.leon:lsettingviewlibrary:1.7.0'
 }

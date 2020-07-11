@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7"
     android:orientation="vertical"
     tools:context=".UI.NewUserActivity">
 
@@ -12,12 +11,19 @@
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="注册上报账号"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:titleTextColor="#FFFFFF" />
+        android:theme="@style/toolbar_blue_theme"
+        app:titleTextColor="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="注册上报账号"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -145,5 +151,5 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/btn_selector"
         android:text="生成上报账号"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/icons" />
 </LinearLayout>
