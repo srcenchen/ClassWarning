@@ -15,17 +15,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.sanenchen.classWarring.ItemRAdapter;
+import com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem.ItemRAdapter;
 import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.R;
-import com.sanenchen.classWarring.WarningSearchAd;
+import com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem.WarningSearchAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,7 +97,7 @@ public class AllWarningActivity extends Fragment {
             public void run() {
 
                 getDataJson getDataJson = new getDataJson();
-                String jsonData = getDataJson.getSearchReply("0", getActivity(), null, null);
+                String jsonData = getDataJson.getSearchReply("getAllClassWarning", getActivity(), null, null);
 
                 try {
                     JSONArray jsonArray = new JSONArray(jsonData);

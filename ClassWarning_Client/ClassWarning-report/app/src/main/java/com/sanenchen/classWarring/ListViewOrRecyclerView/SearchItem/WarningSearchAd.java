@@ -1,4 +1,4 @@
-package com.sanenchen.classWarring;
+package com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem;
 
 public class WarningSearchAd {
     private String title;

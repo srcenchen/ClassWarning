@@ -2,10 +2,14 @@ package com.sanenchen.classWarring.getThings;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Switch;
 
 import com.sanenchen.classWarring.UI.AllWarningActivity;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,7 +26,6 @@ public class getDataJson {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return "";
     }
 
@@ -30,12 +33,26 @@ public class getDataJson {
         getLinkID getlinkID = new getLinkID();
         OkHttpClient client = new OkHttpClient();
         Request request = null;
-        if (MessageWhat.equals("2")) {
-            request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat=" + MessageWhat + "&MysqlID=" + MysqlID).build();
-        } else if (MessageWhat.equals("3")){
-            request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat=" + MessageWhat + "&linkid=" + getlinkID.getLinkID(context) + "&FirstNa=" + FirstNa).build();
-        } else {
-            request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat=" + MessageWhat + "&linkid=" + getlinkID.getLinkID(context)).build();
+
+        switch (MessageWhat) {
+            case "getAllClassWarning":
+            case "getTotalClassWarning":
+                request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat="
+                        + MessageWhat + "&linkid=" + getlinkID.getLinkID(context)).build();
+                break;
+            case "getDetailedThings":
+                request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat="
+                        + MessageWhat + "&MysqlID=" + MysqlID).build();
+                break;
+            case "SearchClassWarning":
+                request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat="
+                        + MessageWhat + "&linkid=" + getlinkID.getLinkID(context) + "&FirstNa=" + FirstNa).build();
+                break;
+            case "getSupportSchool":
+                request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat=getSchool").build();
+                break;
+            default:
+                break;
         }
         try {
             Response response = client.newCall(request).execute();
@@ -66,15 +83,16 @@ public class getDataJson {
         return "";
     }
 
-    public String getAddUserReply(String user, String password, String linkid, String HowToCall) {
+    public String getAddUserReply(String user, String password, String linkid, String schoolName, String grade, String worker) {
+
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/addUser?user=" + user +
                 "&password=" + password + "&linkid=" + linkid +
-                "&howToCall=" + HowToCall).build();
+                "&schoolName=" + schoolName + "&grade=" + grade + "&worker=" + worker).build();
+
         try {
             Response response = client.newCall(request).execute();
             String ReData = response.body().string();
-            Log.i("aaa", ReData);
             return ReData;
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,3 +101,4 @@ public class getDataJson {
         return "";
     }
 }
+

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/schoolWoker"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -57,7 +58,8 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:ems="10"
-                android:hint="请输入用户名" />
+                android:hint="请输入用户名"
+                android:singleLine="true" />
         </LinearLayout>
 
         <View
@@ -94,7 +96,8 @@
                 android:background="@null"
                 android:ems="10"
                 android:hint="请输入密码"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:singleLine="true" />
         </LinearLayout>
 
         <View
@@ -105,10 +108,27 @@
             android:layout_marginRight="10dp"
             android:background="?android:attr/listDivider" />
 
-        <LinearLayout
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ChooseSchool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="20dp"
+                app:srcCompat="@drawable/right" />
 
             <TextView
                 android:id="@+id/textView24"
@@ -116,30 +136,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="集体"
+                android:text="设置院校"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/NewHowCallEditText"
+            <TextView
+                android:id="@+id/textView25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:background="@null"
-                android:ems="10"
-                android:hint="例如：七（1）班" />
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:text="未选择院校" />
+        </FrameLayout>
 
         <View
-            android:id="@+id/divider10"
+            android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:background="?android:attr/listDivider" />
+
     </LinearLayout>
 
     <Button

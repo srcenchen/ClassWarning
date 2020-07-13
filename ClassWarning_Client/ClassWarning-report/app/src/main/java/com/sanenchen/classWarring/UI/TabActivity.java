@@ -18,20 +18,17 @@ import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 
-import com.google.android.material.tabs.TabLayout;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
-import com.sanenchen.classWarring.ItemRAdapter;
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.getThings.getDataJson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class TabActivity extends AppCompatActivity implements View.OnClickListener {
+public class TabActivity extends AppCompatActivity {
 
     String GetUser;
     @Override
@@ -44,7 +41,6 @@ public class TabActivity extends AppCompatActivity implements View.OnClickListen
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         listenButtonActionPerformed();
-
     }
 
     @Override
@@ -132,12 +128,8 @@ public class TabActivity extends AppCompatActivity implements View.OnClickListen
             case R.id.search:
                 Intent intent = new Intent(TabActivity.this, ClassWarningSearchActivity.class);
                 startActivity(intent);
+                break;
         }
         return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }

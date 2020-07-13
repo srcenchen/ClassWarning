@@ -261,7 +261,7 @@ public class ClassWarringUpLoad extends Fragment {
         String ee = dff.format(new Date());
         // 获取日期
         try {
-            String jsonData = getDataJson.getSearchReply("1", getActivity(), null, null);
+            String jsonData = getDataJson.getSearchReply("getTotalClassWarning", getActivity(), null, null);
             JSONArray jsonArray = new JSONArray(jsonData);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
             int geta = jsonObject.getInt("WarningTotal") + 1;
@@ -269,13 +269,11 @@ public class ClassWarringUpLoad extends Fragment {
         } catch (Exception e) {
 
         }
-
-
     }
 
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(@NonNull Message msg) {
+        public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case 1:
                     progressDialog.dismiss();
@@ -283,10 +281,10 @@ public class ClassWarringUpLoad extends Fragment {
                 case 2:
                     progressDialog.dismiss();
                     break;
-
             }
+            return false;
         }
-    };
+    });
 
 
 }

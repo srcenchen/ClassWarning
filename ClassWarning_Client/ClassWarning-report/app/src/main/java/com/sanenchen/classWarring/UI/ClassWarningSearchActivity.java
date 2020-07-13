@@ -8,22 +8,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.sanenchen.classWarring.ItemRAdapter;
+import com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem.ItemRAdapter;
 import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.R;
-import com.sanenchen.classWarring.WarningSearchAd;
+import com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem.WarningSearchAd;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -76,7 +72,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
 
                         char fir = query1.charAt(0);
                         getDataJson getDataJson = new getDataJson();
-                        String jsonData = getDataJson.getSearchReply("3", ClassWarningSearchActivity.this, null, fir+"");
+                        String jsonData = getDataJson.getSearchReply("SearchClassWarning", ClassWarningSearchActivity.this, null, fir+"");
 
                         try {
                             JSONArray jsonArray = new JSONArray(jsonData);
@@ -136,13 +132,14 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
         }
         return true;
     }
 
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(@NonNull Message msg) {
+        public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case ListViewSet:
                     ItemRAdapter adapter = new ItemRAdapter(musicList);
@@ -153,6 +150,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     break;
             }
+            return true;
         }
-    };
+    });
 }

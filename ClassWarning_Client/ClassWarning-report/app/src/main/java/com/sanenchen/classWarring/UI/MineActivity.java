@@ -166,20 +166,38 @@ public class MineActivity extends Fragment {
                         }
                     }
                 }).start();
-
-
             }
         });
     }
 
     public void setPicture() {
+
         prefs = getActivity().getSharedPreferences("BingPicture", MODE_PRIVATE);
         imageView = viewThis.findViewById(R.id.h_head);
         getPrePic = prefs.getString("bingPic", "null");
 
-        Glide.with(getActivity()).load("http://get-bing-pic.cdn.lyqmc.cn/")
-                .bitmapTransform(new CropCircleTransformation(getActivity()))
-                .into(imageView);
+        if (!getPrePic.equals("null")) {
+            Glide.with(getActivity()).load(getPrePic)
+                    .bitmapTransform(new CropCircleTransformation(getActivity()))
+                    .into(imageView);
+        }else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder().url("http://get-bing-pic.cdn.lyqmc.cn/geturl").build();
+                    try {
+                        Response response = client.newCall(request).execute();
+                        ReDataPic = response.body().string();
+                        Message message = new Message();
+                        message.what = 2;
+                        handler.sendMessage(message);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
     }
 
     public void LoginSign() {
@@ -188,7 +206,7 @@ public class MineActivity extends Fragment {
             @Override
             public void run() {
                 getDataJson getDataJson = new getDataJson();
-                String jsonData = getDataJson.getSearchReply("1", getActivity(), null, null);
+                String jsonData = getDataJson.getSearchReply("getTotalClassWarning", getActivity(), null, null);
 
                 try {
                     JSONArray jsonArray = new JSONArray(jsonData);
@@ -218,7 +236,7 @@ public class MineActivity extends Fragment {
                 getDataJson getDataJson = new getDataJson();
 
                 try {
-                    String jsonData1 = getDataJson.getSearchReply("1", getActivity(), null, null);
+                    String jsonData1 = getDataJson.getSearchReply("getTotalClassWarning", getActivity(), null, null);
 
                     try {
                         JSONArray jsonArray1 = new JSONArray(jsonData1);
@@ -247,7 +265,16 @@ public class MineActivity extends Fragment {
                     userID.setText(GetUser);
                     TextView getTotal = viewThis.findViewById(R.id.TotalWarning);
                     getTotal.setText("总违纪次数：" + geta + "次");
-
+                    break;
+                case 2:
+                    Glide.with(getActivity()).load(ReDataPic)
+                            .bitmapTransform(new CropCircleTransformation(getActivity()))
+                            .into(imageView);
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("BingPicture", MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.putString("bingPic", ReDataPic);
+                    editor.apply();
+                    break;
                 case 3:
                     LinearLayout linearLayout;
                     ViewGroup.LayoutParams lp;
@@ -256,6 +283,7 @@ public class MineActivity extends Fragment {
                     Log.i("aaa", lp.height + "");
                     lp.height = Bi;
                     linearLayout.setLayoutParams(lp);
+                    break;
                 case 4:
                     LinearLayout linearLayout1;
                     ViewGroup.LayoutParams lp1;
@@ -263,10 +291,11 @@ public class MineActivity extends Fragment {
                     lp1 = linearLayout1.getLayoutParams();
                     lp1.height = Bi;
                     linearLayout1.setLayoutParams(lp1);
-
+                    break;
                 default:
                     return true;
             }
+            return true;
         }
     });
 }

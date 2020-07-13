@@ -16,9 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.roughike.bottombar.BottomBar;
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.libs.SHA224;
@@ -27,7 +30,10 @@ public class NewUserActivity extends AppCompatActivity {
 
     String GetUser = "";
     String GetPassword = "";
-    String GetHowCall = "";
+    String schoolName;
+    String grade;
+    String Worker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +46,24 @@ public class NewUserActivity extends AppCompatActivity {
             actionBar.setDisplayShowTitleEnabled(false);
             //actionBar.setIcon(R.drawable.back);
         }
+        ViewListen();
+    }
 
+    private void ViewListen() {
         Button NewMainButton = findViewById(R.id.NewMainButton);
         final EditText NewUserEditText = findViewById(R.id.NewUserEditText);
         final EditText NewPasswordEditText = findViewById(R.id.NewPasswordEditText);
-        final EditText NewHowCallEditText = findViewById(R.id.NewHowCallEditText);
+        LinearLayout linearLayout = findViewById(R.id.ChooseSchool);
+        final TextView GetSchool = findViewById(R.id.textView25);
+
+        // 监听选择院校
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewUserActivity.this, ChooseSchoolActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 监听注册
         NewMainButton.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +72,7 @@ public class NewUserActivity extends AppCompatActivity {
                 // 获取注册信息
                 GetUser = NewUserEditText.getText().toString();
                 GetPassword = NewPasswordEditText.getText().toString();
-                GetHowCall = NewHowCallEditText.getText().toString();
-                if (GetUser.equals("") || GetPassword.equals("") || GetHowCall.equals("")) {
+                if (GetUser.equals("") || GetPassword.equals("") || GetSchool.getText().toString().equals("未选择院校")) {
                     Toast.makeText(NewUserActivity.this, "检查下是否全部填写完毕", Toast.LENGTH_SHORT).show();
                 } else {
                     // 尝试注册
@@ -62,11 +80,12 @@ public class NewUserActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             getDataJson getDataJson = new getDataJson();
-                            if (getDataJson.getLoginPassword(GetUser).equals("[]")) {
+                            if (getDataJson.getLoginPassword(GetUser).equals("[]")) { // 如果没找查询到就会只返回[]，说明这个用户名可以注册
                                 // 四位数的随机数
-                                int dom = (int)(Math.random()*(9999-1000+1)+1000);
+                                int dom = (int) (Math.random() * (9999 - 1000 + 1) + 1000);
 
-                                String re = getDataJson.getAddUserReply(GetUser, SHA224.Sha224_reply(GetPassword), SHA224.Sha224_reply(GetUser) + dom, GetHowCall);
+                                String re = getDataJson.getAddUserReply(GetUser, SHA224.Sha224_reply(GetPassword), SHA224.Sha224_reply(GetUser) + dom, schoolName
+                                        , grade, Worker);
 
                                 if (re.equals("注册成功!")) {
                                     Looper.prepare();
@@ -75,7 +94,7 @@ public class NewUserActivity extends AppCompatActivity {
                                     message.what = 1;
                                     handler.sendMessage(message);
                                     Looper.loop();
-                                } else{
+                                } else {
                                     Looper.prepare();
                                     Toast.makeText(NewUserActivity.this, "遇到未知错误！", Toast.LENGTH_SHORT).show();
                                     Looper.loop();
@@ -97,6 +116,23 @@ public class NewUserActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        SharedPreferences sharedPreferences = getSharedPreferences("ChooseCache", MODE_PRIVATE);
+        Boolean CheckALL = sharedPreferences.getBoolean("CheckALL", false);
+        if (CheckALL) {
+            schoolName = sharedPreferences.getString("ChoseSchool", "");
+            grade = sharedPreferences.getString("ChoseGrade", "");
+            Worker = sharedPreferences.getString("ChoseWorker", "");
+
+            TextView textView = findViewById(R.id.textView25);
+            textView.setText(schoolName + "/" + grade + "/" + Worker);
+        }
+
+    }
+
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -114,6 +150,7 @@ public class NewUserActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
         }
         return true;
     }

@@ -1,18 +1,17 @@
-package com.sanenchen.classWarring;
+package com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sanenchen.classWarring.UI.AllWarningActivity;
+import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.UI.TellWarning;
 
 import java.util.List;

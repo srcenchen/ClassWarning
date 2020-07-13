@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FF0000"
     android:orientation="vertical"
-    tools:context=".UI.TabActivity">
+    tools:context=".UI.ChooseSchoolActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
+        android:id="@+id/toolbar5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -20,25 +19,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="班级违纪-上报端"
+            android:text="请选择已与我们合作的院校"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <FrameLayout
-        android:id="@+id/frame"
+    <ListView
+        android:id="@+id/ChooseListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="100">
-
-    </FrameLayout>
-
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:layout_alignParentBottom="true"
-        android:layout_weight="1"
-        android:background="#00FFFFFF"
-        app:bb_tabXmlResource="@xml/bottombar" />
+        android:layout_height="match_parent" />
 </LinearLayout>

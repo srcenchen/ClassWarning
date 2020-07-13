@@ -52,7 +52,7 @@ public class TellWarning extends AppCompatActivity {
             public void run() {
 
                 getDataJson getDataJson = new getDataJson();
-                String jsonData = getDataJson.getSearchReply("2", null, MysqlID, null);
+                String jsonData = getDataJson.getSearchReply("getDetailedThings", null, MysqlID, null);
 
                 try {
                     JSONArray jsonArray = new JSONArray(jsonData);
@@ -93,7 +93,6 @@ public class TellWarning extends AppCompatActivity {
                         linearLayout.setVisibility(LinearLayout.VISIBLE);
                     }
 
-
                     TitleS.setText(TitleSt);
                     ItemWarnS.setText(ItemWarnSt);
                     StudentS.setText(StudentSt);
@@ -104,7 +103,6 @@ public class TellWarning extends AppCompatActivity {
                     } else {
                         BeizhuS.setText(BeizhuSt);
                     }
-
                     progressDialog.dismiss();
                     break;
 
@@ -116,6 +114,7 @@ public class TellWarning extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
         }
         return true;
     }
