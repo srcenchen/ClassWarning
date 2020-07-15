@@ -6,9 +6,12 @@
 
 ## 关于Bing的每日一图API
 ### http://get-bing-pic.cdn.lyqmc.cn/ 用法 
-获取本日图片：[http://get-bing-pic.cdn.lyqmc.cn/getpic](http://get-bing-pic.cdn.lyqmc.cn/getpic "今日图片") 
+获取本日图片：[http://get-bing-pic.cdn.lyqmc.cn/getpic](http://get-bing-pic.cdn.lyqmc.cn/getpic "今日图片") 、
+
 获取本日图片链接：[http://get-bing-pic.cdn.lyqmc.cn/geturl](http://get-bing-pic.cdn.lyqmc.cn/geturl "今日图片链接") 
+
 获取近8日的图片链接及文字介绍：[http://get-bing-pic.cdn.lyqmc.cn/geteightdays](http://get-bing-pic.cdn.lyqmc.cn/geteightdays "近8日的图片链接及文字介绍") 
+
 
 ## 目前已完成的工作
 - 录入违纪信息 
@@ -37,6 +40,7 @@
 很抱歉，由于上线0.0.7.2时没有全面检查功能，导致软件无法正常使用，目前已修复！ 
 - 修复无法退出登录的Bug
 - 修复无法查看详细违纪内容的Bug
+
 全都是些致命Bug [擦汗] 
 
 ## 0.0.7.2 更新 2020/7/13 
