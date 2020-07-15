@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FF0000"
     android:orientation="vertical"
     tools:context=".UI.TabActivity">
 
@@ -21,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="班级违纪-上报端"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/icons"
             android:textSize="18sp" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -33,12 +32,9 @@
 
     </FrameLayout>
 
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBar"
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar_First"
         android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:layout_alignParentBottom="true"
-        android:layout_weight="1"
-        android:background="#00FFFFFF"
-        app:bb_tabXmlResource="@xml/bottombar" />
+        android:layout_height="56dp"
+        android:layout_weight="1" />
 </LinearLayout>

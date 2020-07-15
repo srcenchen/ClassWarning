@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:leon="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:leon="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".UI.AboutActivity">
 
@@ -40,7 +40,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="96dp"
                 android:layout_weight="1"
                 app:srcCompat="@mipmap/icon" />
 
@@ -60,7 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/app_version" />
+                android:text="@string/app_version"
+                android:textColor="@color/secondary_text" />
         </LinearLayout>
 
     </LinearLayout>
@@ -93,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GitHub项目地址"
-            android:textColor="#3F51B5"
+            android:textColor="#B33F51B5"
             android:textSize="16sp" />
 
         <TextView
@@ -101,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/about_me"
-            android:textColor="@color/divider" />
+            android:textColor="@color/secondary_text" />
     </LinearLayout>
 
 </LinearLayout>

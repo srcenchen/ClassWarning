@@ -1,11 +1,5 @@
 package com.sanenchen.classWarring.UI;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -24,6 +18,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.getThings.getDataJson;
@@ -219,8 +217,8 @@ public class ClassWarringUpLoad extends Fragment {
             @Override
             public void onClick(View v) {
                 EditText FunOtherText = viewThis.findViewById(R.id.FunOtherText);
-                FunOtherText.setEnabled(true);
-                linearLayout1.setVisibility(View.GONE);
+                FunOtherText.setEnabled(true);linearLayout1.setVisibility(View.GONE);
+
                 FunCheck = FunOtherText.getText().toString();
             }
         });
@@ -276,8 +274,6 @@ public class ClassWarringUpLoad extends Fragment {
         public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case 1:
-                    progressDialog.dismiss();
-                    break;
                 case 2:
                     progressDialog.dismiss();
                     break;

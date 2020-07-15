@@ -1,10 +1,5 @@
 package com.sanenchen.classWarring.UI;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,11 +7,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.sanenchen.classWarring.getThings.getDataJson;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.getThings.getDataJson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -88,9 +89,11 @@ public class TellWarning extends AppCompatActivity {
                     TextView FunS = findViewById(R.id.FunS);
                     TextView TimeS = findViewById(R.id.TimeS);
                     TextView BeizhuS = findViewById(R.id.BeizhuS);
-                    LinearLayout linearLayout = findViewById(R.id.TimeZoneF);
+                    FrameLayout linearLayout = findViewById(R.id.TimeZoneF);
+                    View divider = findViewById(R.id.divider4);
                     if (FunSt.equals("回家反省")) {
-                        linearLayout.setVisibility(LinearLayout.VISIBLE);
+                        linearLayout.setVisibility(FrameLayout.VISIBLE);
+                        divider.setVisibility(FrameLayout.VISIBLE);
                     }
 
                     TitleS.setText(TitleSt);
@@ -98,7 +101,7 @@ public class TellWarning extends AppCompatActivity {
                     StudentS.setText(StudentSt);
                     FunS.setText(FunSt);
                     TimeS.setText(TimeSt);
-                    if (BeizhuSt == null) {
+                    if (BeizhuSt.equals("")) {
                         BeizhuS.setText("无备注");
                     } else {
                         BeizhuS.setText(BeizhuSt);

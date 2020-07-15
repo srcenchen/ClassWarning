@@ -4,8 +4,11 @@
 - [x] 完整的用户体系
 - [ ] 完整的职业/权限体系
 
-## 关于Bing的每日一图
-访问 [http://get-bing-pic.cdn.lyqmc.cn/](http://get-bing-pic.cdn.lyqmc.cn/ "每日一图") 获取Bing每日一图！
+## 关于Bing的每日一图API
+### http://get-bing-pic.cdn.lyqmc.cn/ 用法 
+获取本日图片：[http://get-bing-pic.cdn.lyqmc.cn/getpic](http://get-bing-pic.cdn.lyqmc.cn/getpic "今日图片") 
+获取本日图片链接：[http://get-bing-pic.cdn.lyqmc.cn/geturl](http://get-bing-pic.cdn.lyqmc.cn/geturl "今日图片链接") 
+获取近8日的图片链接及文字介绍：[http://get-bing-pic.cdn.lyqmc.cn/geteightdays](http://get-bing-pic.cdn.lyqmc.cn/geteightdays "近8日的图片链接及文字介绍") 
 
 ## 目前已完成的工作
 - 录入违纪信息 
@@ -19,6 +22,23 @@
 - 个人头像为Bing的每日一图 
 
 # 版本更新 
+## 0.0.7.5 更新 2020/7/15
+本次更新主要目的：修复Bug，优化界面，全面遵守Material Design，提升效率 
+### 功能新增
+- 无 
+### 功能优化
+#### 配色优化
+- 采用青绿色为主配色，废除粉色 
+#### 界面优化
+- 让Material Design 从个人中心中跳出，到达App的每个角落 
+- 废除BottomBar库，这是个导航栏库，效率有点不尽人意 
+- 采用com.ashokvarma.android:bottom-navigation-bar 
+### Bug修复
+很抱歉，由于上线0.0.7.2时没有全面检查功能，导致软件无法正常使用，目前已修复！ 
+- 修复无法退出登录的Bug
+- 修复无法查看详细违纪内容的Bug
+全都是些致命Bug [擦汗] 
+
 ## 0.0.7.2 更新 2020/7/13 
 本次更新主要目的：紧急修复Bug 
 ### 功能新增 

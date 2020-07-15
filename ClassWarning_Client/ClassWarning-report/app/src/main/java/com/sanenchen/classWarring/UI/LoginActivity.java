@@ -35,6 +35,9 @@ public class LoginActivity extends AppCompatActivity {
     String GetUser = null;
     String GetPassword = null;
     String LinkID = null;
+    String schoolName = null;
+    String grade = null;
+    String worker = null;
 
 
     @Override
@@ -59,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("正在登录，请稍候...");
         progressDialog.setCancelable(false);
 
-        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         String user = preferences.getString("user", null);
 
         if (user != null) {
@@ -102,6 +105,9 @@ public class LoginActivity extends AppCompatActivity {
                                     repliedInfo = "LoginRight";
                                     userName = getUser.getText().toString();
                                     LinkID = jsonObject.getString("LinkID");
+                                    schoolName = jsonObject.getString("schoolName");
+                                    grade = jsonObject.getString("grade");
+                                    worker = jsonObject.getString("worker");
                                 } else {
                                     repliedInfo = "LoginERRORUserOrPassWord";
                                 }
@@ -139,11 +145,14 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("userName", userName);
                     intent.putExtra("Sign", "Yes");
                     startActivity(intent);
-                    SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("LoginData", MODE_PRIVATE).edit();
                     editor.clear();
                     editor.putString("user", GetUser);
                     editor.putString("password", GetPassword);
                     editor.putString("LinkID", LinkID);
+                    editor.putString("schoolName", schoolName);
+                    editor.putString("grade", grade);
+                    editor.putString("worker", worker);
                     editor.apply();
                     progressDialog.dismiss();
                     finish();

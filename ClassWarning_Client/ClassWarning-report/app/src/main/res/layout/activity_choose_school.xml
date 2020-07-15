@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="请选择已与我们合作的院校"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/icons"
             android:textSize="18sp" />
     </androidx.appcompat.widget.Toolbar>
 

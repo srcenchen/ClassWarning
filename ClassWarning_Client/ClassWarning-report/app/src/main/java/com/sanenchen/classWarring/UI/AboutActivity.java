@@ -38,6 +38,8 @@ public class AboutActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
+
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

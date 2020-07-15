@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sanenchen.classWarring">
+    package="com.sanenchen.classWarring" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,13 +11,18 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".UI.ChooseSchoolActivity"></activity>
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".testUI.TestActvity"
+            android:label="@string/title_activity_test_actvity" >
+        </activity>
+        <activity android:name=".UI.ClassManagerActivity" />
+        <activity android:name=".UI.ChooseSchoolActivity" />
         <activity android:name=".UI.AboutActivity" />
         <activity android:name=".Setting.SettingActivity" />
         <activity android:name=".UI.TabActivity" />
         <activity android:name=".UI.NewUserActivity" />
-        <activity android:name=".UI.LoginActivity">
+        <activity android:name=".UI.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

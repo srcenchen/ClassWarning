@@ -1,12 +1,5 @@
 package com.sanenchen.classWarring.UI;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,10 +14,17 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem.ItemRAdapter;
-import com.sanenchen.classWarring.getThings.getDataJson;
-import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem.WarningSearchAd;
+import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.getThings.getDataJson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +62,7 @@ public class AllWarningActivity extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("data", MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences("LoginData", MODE_PRIVATE);
         String user = preferences.getString("user", null);
         String password = preferences.getString("password", null);
 
@@ -91,7 +91,7 @@ public class AllWarningActivity extends Fragment {
                 }
             }
         }).start();
-
+        musicList.clear();
         new Thread(new Runnable() {
             @Override
             public void run() {

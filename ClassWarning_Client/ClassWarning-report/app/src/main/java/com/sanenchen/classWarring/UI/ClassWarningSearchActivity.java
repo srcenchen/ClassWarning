@@ -1,12 +1,5 @@
 package com.sanenchen.classWarring.UI;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,10 +9,17 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem.ItemRAdapter;
-import com.sanenchen.classWarring.getThings.getDataJson;
-import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.ListViewOrRecyclerView.SearchItem.WarningSearchAd;
+import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.getThings.getDataJson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,6 +60,7 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
             //单机搜索按钮时激发该方法
             @Override
             public boolean onQueryTextSubmit(final String query) {
+                musicList.clear();
                 query1 = query;
                 progressDialog = new ProgressDialog(ClassWarningSearchActivity.this);
                 progressDialog.setTitle("查询中");

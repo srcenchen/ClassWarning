@@ -8,8 +8,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class getLinkID {
     public String getLinkID (Context context){
-        SharedPreferences preferences = context.getSharedPreferences("data", MODE_PRIVATE);
-        String linkID = preferences.getString("LinkID", null);
+        String linkID = "";
+        try {
+            SharedPreferences preferences = context.getSharedPreferences("LoginData", MODE_PRIVATE);
+            linkID = preferences.getString("LinkID", null);
+        } catch (Exception e) { }
         return linkID;
     }
 }

@@ -1,45 +1,39 @@
 package com.sanenchen.classWarring.UI;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.leon.lib.settingview.LSettingItem;
+import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.Setting.SettingActivity;
 import com.sanenchen.classWarring.getThings.getDataJson;
-import com.sanenchen.classWarring.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -85,7 +79,7 @@ public class MineActivity extends Fragment {
         SettingListen();
         return view;
     }
-
+    //监听那些按钮
     public void SettingListen() {
         LSettingItem SearchLike = viewThis.findViewById(R.id.SearchLike);
 
@@ -108,6 +102,7 @@ public class MineActivity extends Fragment {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
+    // 主要是滚动时的动画
     public void ViewListen() {
         ScrollView scrollView = viewThis.findViewById(R.id.MineScrollView);
 
@@ -170,8 +165,9 @@ public class MineActivity extends Fragment {
         });
     }
 
+    // 将头像设置为Bing每日一图
     public void setPicture() {
-
+        // 设置Bing一图
         prefs = getActivity().getSharedPreferences("BingPicture", MODE_PRIVATE);
         imageView = viewThis.findViewById(R.id.h_head);
         getPrePic = prefs.getString("bingPic", "null");
@@ -180,28 +176,44 @@ public class MineActivity extends Fragment {
             Glide.with(getActivity()).load(getPrePic)
                     .bitmapTransform(new CropCircleTransformation(getActivity()))
                     .into(imageView);
-        }else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().url("http://get-bing-pic.cdn.lyqmc.cn/geturl").build();
-                    try {
-                        Response response = client.newCall(request).execute();
-                        ReDataPic = response.body().string();
-                        Message message = new Message();
-                        message.what = 2;
-                        handler.sendMessage(message);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
         }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder().url("http://get-bing-pic.cdn.lyqmc.cn/geturl").build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    ReDataPic = response.body().string();
+                    Message message = new Message();
+                    message.what = 2;
+                    handler.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
+    // 获取总违纪数
+    @SuppressLint("SetTextI18n")
     public void LoginSign() {
-        // 验证身份
+        // 获取基本用户信息
+        SharedPreferences preferences = getActivity().getSharedPreferences("LoginData", MODE_PRIVATE);
+        String user = preferences.getString("user", null);
+        String password = preferences.getString("password", null);
+        String schoolName = preferences.getString("schoolName", "");
+        String grade = preferences.getString("grade", "");
+        String worker = preferences.getString("worker", "");
+        GetUser = user;
+        GetPassword = password;
+        TextView userID = viewThis.findViewById(R.id.userID);
+        TextView SchoolInformation = viewThis.findViewById(R.id.SchoolInformation);
+        userID.setText(GetUser); // 放入用户名
+        SchoolInformation.setText(schoolName + " / " + grade + " / " + worker);
+        // 获取总违纪次数
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -220,40 +232,6 @@ public class MineActivity extends Fragment {
                 handler.sendMessage(message);
             }
         }).start();
-
-
-        SharedPreferences preferences = getActivity().getSharedPreferences("data", MODE_PRIVATE);
-        String user = preferences.getString("user", null);
-        String password = preferences.getString("password", null);
-
-        GetUser = user;
-        GetPassword = password;
-
-        final Intent intent = getActivity().getIntent();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getDataJson getDataJson = new getDataJson();
-
-                try {
-                    String jsonData1 = getDataJson.getSearchReply("getTotalClassWarning", getActivity(), null, null);
-
-                    try {
-                        JSONArray jsonArray1 = new JSONArray(jsonData1);
-                        JSONObject jsonObject = jsonArray1.getJSONObject(0);
-                        geta = jsonObject.getString("WarningTotal");
-                    } catch (Exception e) {
-
-                    }
-                    Message message = new Message();
-                    message.what = 1;
-                    handler.sendMessage(message);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
     }
 
     private Handler handler = new Handler(new Handler.Callback() {
@@ -261,19 +239,22 @@ public class MineActivity extends Fragment {
         public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case 1:
-                    TextView userID = viewThis.findViewById(R.id.userID);
-                    userID.setText(GetUser);
                     TextView getTotal = viewThis.findViewById(R.id.TotalWarning);
                     getTotal.setText("总违纪次数：" + geta + "次");
                     break;
                 case 2:
-                    Glide.with(getActivity()).load(ReDataPic)
-                            .bitmapTransform(new CropCircleTransformation(getActivity()))
-                            .into(imageView);
-                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("BingPicture", MODE_PRIVATE).edit();
-                    editor.clear();
-                    editor.putString("bingPic", ReDataPic);
-                    editor.apply();
+                    if (getPrePic.equals(ReDataPic)) {
+
+                    } else {
+                        Glide.with(getActivity()).load(ReDataPic)
+                                .bitmapTransform(new CropCircleTransformation(getActivity()))
+                                .into(imageView);
+                        SharedPreferences.Editor editor = getActivity().getSharedPreferences("BingPicture", MODE_PRIVATE).edit();
+                        editor.clear();
+                        editor.putString("bingPic", ReDataPic);
+                        editor.apply();
+                    }
+
                     break;
                 case 3:
                     LinearLayout linearLayout;

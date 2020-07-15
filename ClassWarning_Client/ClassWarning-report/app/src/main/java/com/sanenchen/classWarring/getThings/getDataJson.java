@@ -2,14 +2,8 @@ package com.sanenchen.classWarring.getThings;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Switch;
-
-import com.sanenchen.classWarring.UI.AllWarningActivity;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,9 +28,11 @@ public class getDataJson {
         OkHttpClient client = new OkHttpClient();
         Request request = null;
 
+        int i;
         switch (MessageWhat) {
             case "getAllClassWarning":
             case "getTotalClassWarning":
+            case "getMyClass":
                 request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat="
                         + MessageWhat + "&linkid=" + getlinkID.getLinkID(context)).build();
                 break;
@@ -57,6 +53,7 @@ public class getDataJson {
         try {
             Response response = client.newCall(request).execute();
             String ReData = response.body().string();
+            Log.i("Result", ReData);
             return ReData;
         } catch (IOException e) {
             e.printStackTrace();
