@@ -17,14 +17,15 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/TipsNewClassCardView"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="96dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="10dp"
         android:visibility="visible"
         app:cardBackgroundColor="@color/card_view_background"
-        app:cardCornerRadius="2dp"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp"
         tools:visibility="visible">
 
         <LinearLayout

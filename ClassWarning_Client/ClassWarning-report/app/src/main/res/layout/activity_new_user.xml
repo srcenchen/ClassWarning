@@ -15,16 +15,8 @@
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/toolbar_blue_theme"
-        app:titleTextColor="#FFFFFF">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="注册上报账号"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-    </androidx.appcompat.widget.Toolbar>
+        app:title="注册上报用户"
+        app:titleTextColor="@color/icons" />
 
     <LinearLayout
         android:layout_width="match_parent"

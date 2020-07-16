@@ -50,7 +50,6 @@ public class ClassWarningSearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
 
         recyclerView = findViewById(R.id.listView2);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

@@ -12,11 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +24,6 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.leon.lib.settingview.LSettingItem;
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.Setting.SettingActivity;
 import com.sanenchen.classWarring.getThings.getDataJson;
@@ -81,21 +80,20 @@ public class MineActivity extends Fragment {
     }
     //监听那些按钮
     public void SettingListen() {
-        LSettingItem SearchLike = viewThis.findViewById(R.id.SearchLike);
-
-        SearchLike.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+        // 监听设置按钮
+        FrameLayout settingButton = viewThis.findViewById(R.id.settingButton);
+        settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void click(boolean isChecked) {
-                Toast.makeText(getActivity(), "下线维护中···", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
             }
         });
-
-        LSettingItem Setting = viewThis.findViewById(R.id.Setting);
-
-        Setting.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+        FrameLayout aboutThisButton = viewThis.findViewById(R.id.aboutThisButton);
+        aboutThisButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void click(boolean isChecked) {
-                Intent intent = new Intent(getActivity(), SettingActivity.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AboutActivity.class);
                 startActivity(intent);
             }
         });

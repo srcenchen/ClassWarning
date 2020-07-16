@@ -1,11 +1,5 @@
 package com.sanenchen.classWarring.UI;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.getThings.getDataJson;
@@ -23,8 +21,6 @@ import com.sanenchen.classWarring.getThings.getDataJson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 public class ChooseSchoolActivity extends AppCompatActivity {
     // 监测步骤
@@ -46,7 +42,6 @@ public class ChooseSchoolActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(false);
         }
 
         setDataToListView(ChooseSchoolSTEP);

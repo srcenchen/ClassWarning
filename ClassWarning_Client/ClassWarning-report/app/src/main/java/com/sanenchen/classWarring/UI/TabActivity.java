@@ -33,7 +33,6 @@ public class TabActivity extends AppCompatActivity implements BottomNavigationBa
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
 
         BottomNavigationBar bottomNavigationBar = findViewById(R.id.bottom_navigation_bar_First);
         bottomNavigationBar

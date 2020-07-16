@@ -14,8 +14,12 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/card_view_background"
-        app:cardCornerRadius="2dp">
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp">
 
         <FrameLayout
             android:layout_width="match_parent"

@@ -11,5 +11,4 @@
     <style name="toolbar_blue_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorControlNormal">@color/icons</item>
     </style>
-
 </resources>

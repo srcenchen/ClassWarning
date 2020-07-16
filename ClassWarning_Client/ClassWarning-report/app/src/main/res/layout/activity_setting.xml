@@ -15,40 +15,73 @@
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/toolbar_blue_theme"
-        app:titleTextColor="#FFFFFF">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="设置"
-            android:textColor="@color/icons"
-            android:textSize="18sp" />
-    </androidx.appcompat.widget.Toolbar>
+        app:title="设置"
+        app:titleTextColor="@color/icons" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.leon.lib.settingview.LSettingItem
-            android:id="@+id/ExitLogin"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            leon:isShowUnderLine="false"
-            leon:leftIcon="@drawable/exitlogin"
-            leon:leftText="退出登录">
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            leon:cardCornerRadius="3dp"
+            leon:cardElevation="2dp">
 
-        </com.leon.lib.settingview.LSettingItem>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <com.leon.lib.settingview.LSettingItem
-            android:id="@+id/About"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            leon:isShowUnderLine="false"
-            leon:leftText="关于班级违纪-上报端" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="工具箱"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/exitLoginButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="16dp"
+                            android:src="@drawable/ic_baseline_exit_to_app_24" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="72dp"
+                            android:text="退出登录"
+                            android:textColor="@color/primary_text"
+                            android:textSize="18sp" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 </LinearLayout>

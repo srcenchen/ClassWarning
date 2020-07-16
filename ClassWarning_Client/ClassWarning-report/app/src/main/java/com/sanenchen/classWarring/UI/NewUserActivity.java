@@ -1,10 +1,5 @@
 package com.sanenchen.classWarring.UI;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,8 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import com.roughike.bottombar.BottomBar;
 import com.sanenchen.classWarring.R;
 import com.sanenchen.classWarring.getThings.getDataJson;
 import com.sanenchen.classWarring.libs.SHA224;
@@ -43,7 +41,6 @@ public class NewUserActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(false);
             //actionBar.setIcon(R.drawable.back);
         }
         ViewListen();

@@ -4,15 +4,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.leon.lib.settingview.LSettingItem;
 import com.sanenchen.classWarring.R;
-import com.sanenchen.classWarring.UI.AboutActivity;
 import com.sanenchen.classWarring.UI.LoginActivity;
 import com.sanenchen.classWarring.UI.TabActivity;
 
@@ -26,18 +26,17 @@ public class SettingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
 
         SettingListen();
     }
 
     public void SettingListen() {
-        LSettingItem ExitLogin = findViewById(R.id.ExitLogin);
-        LSettingItem AboutMe = findViewById(R.id.About);
+        FrameLayout exitLoginButton = findViewById(R.id.exitLoginButton);
+        //LSettingItem AboutMe = findViewById(R.id.About);
 
-        ExitLogin.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
+        exitLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void click(boolean isChecked) {
+            public void onClick(View v) {
                 SharedPreferences.Editor editor = getSharedPreferences("LoginData", MODE_PRIVATE).edit();
                 editor.clear();
                 editor.apply();
@@ -45,14 +44,6 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
                 TabActivity.instance.finish();
                 finish();
-            }
-        });
-
-        AboutMe.setmOnLSettingItemClick(new LSettingItem.OnLSettingItemClick() {
-            @Override
-            public void click(boolean isChecked) {
-                Intent intent = new Intent(SettingActivity.this, AboutActivity.class);
-                startActivity(intent);
             }
         });
     }

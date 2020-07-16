@@ -20,7 +20,6 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="810f9611" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -80,12 +79,14 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi" />
-    <property name="project.structure.last.edited" value="Dependencies" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="PsdUISettings">
+    <option name="MODULE_TAB" value="Default Config" />
+    <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
@@ -105,7 +106,7 @@
     <key name="android.template.-479170103">
       <recent name="com.sanenchen.classWarring.UI" />
     </key>
-    <key name="android.template.-887223692">
+    <key name="android.template.1480580084">
       <recent name="com.sanenchen.classWarring.UI" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -121,9 +122,6 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.sanenchen.classWarring" />
     </key>
-    <key name="android.template.1480580084">
-      <recent name="com.sanenchen.classWarring.UI" />
-    </key>
     <key name="android.template.415350241">
       <recent name="com.sanenchen.classWarring" />
     </key>
@@ -131,6 +129,9 @@
       <recent name="D:\Codes\Android\GitHub\ClassWarning\app\src\main\res\mipmap-anydpi-v26" />
       <recent name="D:\Codes\Android\GitHub\ClassWarning\app\src\main\res\drawable-v24" />
       <recent name="D:\Codes\Android\GitHub\ClassWarning\app\src\main\res\drawable" />
+    </key>
+    <key name="android.template.-887223692">
+      <recent name="com.sanenchen.classWarring.UI" />
     </key>
     <key name="android.template.packageName">
       <recent name="com.sanenchen.classWarring" />
@@ -236,10 +237,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1593133505886" />
-    <state x="200" y="96" key="#PSD" timestamp="1593011033679">
+    <state x="190" y="91" key="#PSD" timestamp="1594921216618">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="200" y="96" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1593011033679" />
+    <state x="190" y="91" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1594921216618" />
     <state x="385" y="16" key="#app" timestamp="1593816939388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -256,14 +257,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="363" y="90" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.728@0.0.1366.728" timestamp="1594446079999" />
-    <state x="462" y="222" width="449" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1594605858526">
+    <state x="462" y="222" width="449" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1594909717310">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="462" y="222" width="449" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1594605858526" />
-    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594819928604">
+    <state x="462" y="222" width="449" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1594909717310" />
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594912640655">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1594819928604" />
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1594912640655" />
     <state x="263" y="119" key="AndroidCreateResourceDirectoryDialog" timestamp="1593012008521">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -284,25 +285,25 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="220" y="125" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1594784401238" />
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1594823073823">
+    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1594858978749">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1594823073823" />
+    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1594858978749" />
     <state width="1413" height="193" key="GridCell.Tab.0.bottom/0.0.1456.778@0.0.1456.778" timestamp="1594653371252" />
-    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1594823073822">
+    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1594858978748">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1594823073822" />
+    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1594858978748" />
     <state width="1413" height="193" key="GridCell.Tab.0.center/0.0.1456.778@0.0.1456.778" timestamp="1594653371252" />
-    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1594823073822">
+    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1594858978748">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1594823073822" />
+    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1594858978748" />
     <state width="1413" height="193" key="GridCell.Tab.0.left/0.0.1456.778@0.0.1456.778" timestamp="1594653371251" />
-    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1594823073823">
+    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1594858978748">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1594823073823" />
+    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1594858978748" />
     <state width="1413" height="193" key="GridCell.Tab.0.right/0.0.1456.778@0.0.1456.778" timestamp="1594653371252" />
     <state width="1323" height="222" key="GridCell.Tab.1.bottom" timestamp="1594820833022">
       <screen x="0" y="0" width="1366" height="728" />
@@ -356,18 +357,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/sanenchen/classWarring/UI/NewUserActivity.java</url>
-          <line>97</line>
+          <line>94</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/sanenchen/classWarring/UI/NewUserActivity.java</url>
-          <line>98</line>
+          <line>95</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sanenchen/classWarring/UI/TellWarning.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -37,7 +37,6 @@ public class TellWarning extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
 
         Intent intent = getIntent();
         MysqlID = intent.getStringExtra("MysqlID");

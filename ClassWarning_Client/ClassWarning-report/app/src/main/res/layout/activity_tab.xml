@@ -13,16 +13,9 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/toolbar_blue_theme">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="班级违纪-上报端"
-            android:textColor="@color/icons"
-            android:textSize="18sp" />
-    </androidx.appcompat.widget.Toolbar>
+        android:theme="@style/toolbar_blue_theme"
+        app:title="班级违纪-上报端"
+        app:titleTextColor="@color/icons" />
 
     <FrameLayout
         android:id="@+id/frame"

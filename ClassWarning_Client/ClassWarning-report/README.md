@@ -4,6 +4,8 @@
 - [x] 完整的用户体系
 - [ ] 完整的职业/权限体系
 
+到达0.1版本时，正式发布Beta版本并且 软件内更新，Github版本发布正式投入使用！
+
 ## 关于Bing的每日一图API
 ### http://get-bing-pic.cdn.lyqmc.cn/ 用法 
 获取本日图片：[http://get-bing-pic.cdn.lyqmc.cn/getpic](http://get-bing-pic.cdn.lyqmc.cn/getpic "今日图片") 、
@@ -25,8 +27,14 @@
 - 个人头像为Bing的每日一图 
 
 # 版本更新 
+## 0.0.7.7 更新 2020/7/17
+本次更新主要目的：优化“我的”界面
+### 界面优化
+- “我的”，“设置”，“关于”都加入Material Design大军了
+- 新增水波纹动画
+
 ## 0.0.7.5 更新 2020/7/15
-本次更新主要目的：修复Bug，优化界面，全面遵守Material Design，提升效率 
+本次更新主要目的：修复Bug，优化界面，全面遵守Material Design，提升美感 
 ### 功能新增
 - 无 
 ### 功能优化
