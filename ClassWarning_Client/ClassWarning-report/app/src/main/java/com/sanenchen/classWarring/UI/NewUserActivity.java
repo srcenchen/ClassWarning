@@ -83,7 +83,7 @@ public class NewUserActivity extends AppCompatActivity {
 
                                 String re = getDataJson.getAddUserReply(GetUser, SHA224.Sha224_reply(GetPassword), SHA224.Sha224_reply(GetUser) + dom, schoolName
                                         , grade, Worker);
-                                
+
                                 Looper.prepare();
                                 Toast.makeText(NewUserActivity.this, "注册成功！请登录！", Toast.LENGTH_SHORT).show();
                                 Message message = new Message();
