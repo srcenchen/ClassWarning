@@ -2,14 +2,17 @@ package com.sanenchen.classWarring.UI;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,6 +43,7 @@ public class ClassManagerActivity extends Fragment {
     final int NotFoundClass = 0; // 在服务器中没有找到班级信息时
     final int FoundClass = 1; // 在服务器中找到班级信息时
     final int CreateClassRight = 2; // 当创建班级成功后
+    final int JoinClassRight = 3; // 当加入班级成功后
     // 这是全局View
     View viewThis;
     // 定义全局变量
@@ -116,6 +120,47 @@ public class ClassManagerActivity extends Fragment {
                 });
             }
         });
+        /*监听加入班级CardView*/
+        CardView joinClass = viewThis.findViewById(R.id.joinClass);
+        joinClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText et = new EditText(getActivity());
+                new AlertDialog.Builder(getActivity()).setTitle("请输入班级ID")
+                        .setIcon(R.drawable.ic_baseline_class_24)
+                        .setView(et)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Boolean TestID = false;
+                                for (int n = 0; n < classManagerLists.size(); n++) {
+                                    ClassManagerList classManagerList = classManagerLists.get(n);
+                                    if (classManagerList.getClassID().equals(et.getText().toString())) {
+                                        TestID = true;
+                                        Toast.makeText(getActivity(), "这个班级已经加入了", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                if (!TestID) {
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            getDataJson getDataJson = new getDataJson();
+                                            if (getDataJson.getJoinClassReply(et.getText().toString(), getActivity()).equals("加入成功!")) {
+                                                Message message = new Message();
+                                                message.what = JoinClassRight;
+                                                handler.sendMessage(message);
+                                            } else {
+                                                Looper.prepare();
+                                                Toast.makeText(getActivity(), "班级不存在", Toast.LENGTH_SHORT).show();
+                                                Looper.loop();
+                                            }
+                                        }
+                                    }).start();
+                                }
+                            }
+                        }).setNegativeButton("取消",null).show();
+            }
+        });
     }
 
     private void getMyClass() {
@@ -178,7 +223,13 @@ public class ClassManagerActivity extends Fragment {
                     break;
                 case CreateClassRight:
                     getMyClass();// 刷新班级列表
+                    tipsNoClass.setVisibility(LinearLayout.GONE);
                     Toast.makeText(getActivity(), "班级创建成功", Toast.LENGTH_SHORT).show();
+                    break;
+                case JoinClassRight:
+                    getMyClass();// 刷新班级列表
+                    tipsNoClass.setVisibility(LinearLayout.GONE);
+                    Toast.makeText(getActivity(), "班级加入成功", Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;

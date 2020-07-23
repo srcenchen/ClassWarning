@@ -10,6 +10,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class getDataJson {
+    /**
+     * @description 获取Hash后的密码
+     * @return String
+     */
     public String getLoginPassword(String user) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/loginSign?user=" + user).build();
@@ -23,6 +27,10 @@ public class getDataJson {
         return "";
     }
 
+    /**
+     * @description 获取一系列的东西
+     * @return String
+     */
     public String getSearchReply(String MessageWhat, Context context, String MysqlID, String FirstNa) {
         getIDs getIDs = new getIDs();
         OkHttpClient client = new OkHttpClient();
@@ -62,6 +70,10 @@ public class getDataJson {
         return "";
     }
 
+    /**
+     * @description 新增违纪信息
+     * @return String
+     */
     public String getAddWarnReply(String Title, String WarningGroup, String WarningStudent, String WarningFun, String FunStartTime, String FunEndTime
             , String BeizhuSS, String ee, int geta, Context context) {
         getIDs getIDs = new getIDs();
@@ -81,6 +93,10 @@ public class getDataJson {
         return "";
     }
 
+    /**
+     * @description 新增用户
+     * @return String
+     */
     public String getAddUserReply(String user, String password, String linkid, String schoolName, String grade, String worker) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/addUser?user=" + user +
@@ -98,6 +114,10 @@ public class getDataJson {
         return "";
     }
 
+    /**
+     * @description 新建班级
+     * @return String
+     */
     public String getAddClassReply(String inGrade, String className, Context context) {
         getIDs getIDs = new getIDs();
         OkHttpClient client = new OkHttpClient();
@@ -114,6 +134,30 @@ public class getDataJson {
         return "";
     }
 
+    /**
+     * @description 加入班级
+     * @return String
+     */
+    public String getJoinClassReply(String classID, Context context) {
+        OkHttpClient client = new OkHttpClient();
+        getIDs getIDs = new getIDs();
+        Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/joinClassReply?classID=" + classID +
+                "&linkid=" + getIDs.getLinkID(context)).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            String ReData = response.body().string();
+            return ReData;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * @description 获取更新日志
+     * @return String
+     */
     public String getUpdateThings() {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://sancloud.lyqmc.cn/classWarning/updateThings.json").build();
