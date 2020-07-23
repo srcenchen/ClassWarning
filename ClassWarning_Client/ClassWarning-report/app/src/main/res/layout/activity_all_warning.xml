@@ -8,10 +8,24 @@
     android:visibility="visible"
     tools:context=".UI.AllWarningActivity">
 
+    <TextView
+        android:id="@+id/tips_no_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="啊嘞，没有违纪可查看"
+        android:textColor="@color/primary_text"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
         android:overScrollMode="never" />
 
 </LinearLayout>

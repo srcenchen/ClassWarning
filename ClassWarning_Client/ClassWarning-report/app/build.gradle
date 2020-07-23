@@ -9,7 +9,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
-        versionName '0.0.7.7'
+        versionName '0.0.8'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,6 +45,6 @@ dependencies {
     implementation 'com.roughike:bottom-bar:2.0.2'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'jp.wasabeef:glide-transformations:2.0.1'
-    implementation 'com.leon:lsettingviewlibrary:1.7.0'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
+
 }

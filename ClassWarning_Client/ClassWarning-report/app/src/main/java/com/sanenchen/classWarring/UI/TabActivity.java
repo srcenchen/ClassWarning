@@ -2,7 +2,10 @@ package com.sanenchen.classWarring.UI;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,6 +19,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.getThings.getDataJson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class TabActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
     public static Activity instance;
@@ -23,16 +30,26 @@ public class TabActivity extends AppCompatActivity implements BottomNavigationBa
     private AllWarningActivity classManagerActivity;
     private ClassWarringUpLoad classWarringUpLoad;
     private MineActivity mineActivity;
+    ActionBar actionBar;
+    String classID;
+    String inGrade, className;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
         Toolbar toolbar = findViewById(R.id.toolbar3);
-        toolbar.inflateMenu(R.menu.bottom_nav_menu);
+        toolbar.inflateMenu(R.menu.searc_menu);
         setSupportActionBar(toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Intent intent = getIntent();
+        classID = intent.getStringExtra("classID");
+        SharedPreferences.Editor editor = getSharedPreferences("ChooseCache",MODE_PRIVATE).edit();
+        editor.putString("chooseClassID", classID);
+        editor.apply();
 
         BottomNavigationBar bottomNavigationBar = findViewById(R.id.bottom_navigation_bar_First);
         bottomNavigationBar
@@ -44,15 +61,41 @@ public class TabActivity extends AppCompatActivity implements BottomNavigationBa
                 .setBarBackgroundColor(R.color.card_view_background);//导航栏背景色
 
         bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.mipmap.ic_home_black_24dp, "首页"))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_cloud_upload_black_24dp, "上报"))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_account_circle_black_24dp, "我的"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_home_24, "首页"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_cloud_upload_24, "上报"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_account_circle_24, "我的"))
                 .setFirstSelectedPosition(lastSelectedPosition )
                 .initialise(); //initialise 一定要放在 所有设置的最后一项
 
         setDefaultFragment();//设置默认导航栏
+        setTitle();
 
         instance = this;
+    }
+
+    /**
+     * 设置Title
+     */
+    private void setTitle() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getDataJson getDataJson = new getDataJson();
+                String result = getDataJson.getSearchReply("getClassTitle", TabActivity.this, null, null);
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    inGrade = jsonObject.getString("inGrade");
+                    className = jsonObject.getString("className");
+                    Message message = new Message();
+                    message.what = 0;
+                    handler.sendMessage(message);
+                } catch (Exception e) {
+
+                }
+
+            }
+        }).start();
     }
 
     /**
@@ -116,7 +159,7 @@ public class TabActivity extends AppCompatActivity implements BottomNavigationBa
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
+        getMenuInflater().inflate(R.menu.searc_menu, menu);
         return true;
     }
 
@@ -128,7 +171,25 @@ public class TabActivity extends AppCompatActivity implements BottomNavigationBa
                 Intent intent = new Intent(TabActivity.this, ClassWarningSearchActivity.class);
                 startActivity(intent);
                 break;
+            case android.R.id.home:
+                finish();
+                break;
         }
         return true;
     }
+
+    private Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            switch (msg.what) {
+                case 0:
+                    actionBar.setTitle(inGrade + className);
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        }
+    });
+
 }

@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.sanenchen.classWarring.R;
+import com.sanenchen.classWarring.Setting.AboutActivity;
 import com.sanenchen.classWarring.Setting.SettingActivity;
 import com.sanenchen.classWarring.getThings.getDataJson;
 
@@ -75,28 +75,7 @@ public class MineActivity extends Fragment {
         setPicture();
         LoginSign();
         ViewListen();
-        SettingListen();
         return view;
-    }
-    //监听那些按钮
-    public void SettingListen() {
-        // 监听设置按钮
-        FrameLayout settingButton = viewThis.findViewById(R.id.settingButton);
-        settingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
-            }
-        });
-        FrameLayout aboutThisButton = viewThis.findViewById(R.id.aboutThisButton);
-        aboutThisButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AboutActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -221,7 +200,7 @@ public class MineActivity extends Fragment {
                 try {
                     JSONArray jsonArray = new JSONArray(jsonData);
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
-                    geta = jsonObject.getString("WarningTotal");
+                    geta = jsonObject.getString("warningTotal");
                 } catch (Exception e) {
 
                 }
@@ -238,12 +217,10 @@ public class MineActivity extends Fragment {
             switch (msg.what) {
                 case 1:
                     TextView getTotal = viewThis.findViewById(R.id.TotalWarning);
-                    getTotal.setText("总违纪次数：" + geta + "次");
+                    getTotal.setText("这个班级的违纪次数：" + geta + "次");
                     break;
                 case 2:
-                    if (getPrePic.equals(ReDataPic)) {
-
-                    } else {
+                    if (!getPrePic.equals(ReDataPic)) {
                         Glide.with(getActivity()).load(ReDataPic)
                                 .bitmapTransform(new CropCircleTransformation(getActivity()))
                                 .into(imageView);
@@ -259,7 +236,6 @@ public class MineActivity extends Fragment {
                     ViewGroup.LayoutParams lp;
                     linearLayout = viewThis.findViewById(R.id.SHOWSELF);
                     lp = linearLayout.getLayoutParams();
-                    Log.i("aaa", lp.height + "");
                     lp.height = Bi;
                     linearLayout.setLayoutParams(lp);
                     break;

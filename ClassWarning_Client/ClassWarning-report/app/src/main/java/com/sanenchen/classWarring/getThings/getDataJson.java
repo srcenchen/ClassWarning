@@ -24,17 +24,19 @@ public class getDataJson {
     }
 
     public String getSearchReply(String MessageWhat, Context context, String MysqlID, String FirstNa) {
-        getLinkID getlinkID = new getLinkID();
+        getIDs getIDs = new getIDs();
         OkHttpClient client = new OkHttpClient();
         Request request = null;
-
-        int i;
         switch (MessageWhat) {
+            case "getClassTitle":
             case "getAllClassWarning":
             case "getTotalClassWarning":
+                request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat="
+                        + MessageWhat + "&linkid=" + getIDs.getClassID(context)).build();
+                break;
             case "getMyClass":
                 request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat="
-                        + MessageWhat + "&linkid=" + getlinkID.getLinkID(context)).build();
+                        + MessageWhat + "&linkid=" + getIDs.getLinkID(context)).build();
                 break;
             case "getDetailedThings":
                 request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat="
@@ -42,7 +44,7 @@ public class getDataJson {
                 break;
             case "SearchClassWarning":
                 request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat="
-                        + MessageWhat + "&linkid=" + getlinkID.getLinkID(context) + "&FirstNa=" + FirstNa).build();
+                        + MessageWhat + "&linkid=" + getIDs.getClassID(context) + "&FirstNa=" + FirstNa).build();
                 break;
             case "getSupportSchool":
                 request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/SearchSQL?messagewhat=getSchool").build();
@@ -53,7 +55,6 @@ public class getDataJson {
         try {
             Response response = client.newCall(request).execute();
             String ReData = response.body().string();
-            Log.i("Result", ReData);
             return ReData;
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,13 +64,13 @@ public class getDataJson {
 
     public String getAddWarnReply(String Title, String WarningGroup, String WarningStudent, String WarningFun, String FunStartTime, String FunEndTime
             , String BeizhuSS, String ee, int geta, Context context) {
-        getLinkID getlinkID = new getLinkID();
+        getIDs getIDs = new getIDs();
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/AddWarning?Title=" + Title
                 + "&WarningGroup=" + WarningGroup + "&WarningStudent="
                 + WarningStudent + "&WarningFun=" + WarningFun + "&FunStartTime="
                 + FunStartTime + "&FunEndTime=" + FunEndTime + "&BeizhuSS=" + BeizhuSS
-                + "&ee=" + ee + "&linkid=" + getlinkID.getLinkID(context) + "&Total=" + geta).build();
+                + "&ee=" + ee + "&linkid=" + getIDs.getLinkID(context) + "&Total=" + geta + "&classID=" + getIDs.getClassID(context)).build();
         try {
             Response response = client.newCall(request).execute();
             String ReData = response.body().string();
@@ -81,11 +82,27 @@ public class getDataJson {
     }
 
     public String getAddUserReply(String user, String password, String linkid, String schoolName, String grade, String worker) {
-
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/addUser?user=" + user +
                 "&password=" + password + "&linkid=" + linkid +
                 "&schoolName=" + schoolName + "&grade=" + grade + "&worker=" + worker).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            String ReData = response.body().string();
+            return ReData;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    public String getAddClassReply(String inGrade, String className, Context context) {
+        getIDs getIDs = new getIDs();
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("http://classwarning.cdn.lyqmc.cn/addClassReply?inGrade=" + inGrade +
+                "&className=" + className + "&linkid=" + getIDs.getLinkID(context)).build();
 
         try {
             Response response = client.newCall(request).execute();

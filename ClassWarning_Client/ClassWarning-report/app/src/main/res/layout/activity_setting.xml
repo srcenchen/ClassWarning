@@ -8,16 +8,6 @@
     android:orientation="vertical"
     tools:context=".Setting.SettingActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarSetting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/toolbar_blue_theme"
-        app:title="设置"
-        app:titleTextColor="@color/icons" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,7 +65,7 @@
                             android:layout_marginLeft="72dp"
                             android:text="退出登录"
                             android:textColor="@color/primary_text"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </FrameLayout>
 
                 </LinearLayout>

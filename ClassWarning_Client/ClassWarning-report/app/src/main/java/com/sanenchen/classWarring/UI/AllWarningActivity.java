@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,7 @@ public class AllWarningActivity extends Fragment {
     static String[] WarningStudent = null;
     static String[] WarningID = null;
     static String[] WarningDate = null;
-    private List<WarningSearchAd> SearchList = new ArrayList<>();
+    //private List<WarningSearchAd> SearchList = new ArrayList<>();
     public static final int ListViewSet = 1;
     ListView listView = null;
     String GetUser;
@@ -116,12 +117,10 @@ public class AllWarningActivity extends Fragment {
                 } catch (Exception e) { }
 
                 if (HowMany == 0) {
-                    Looper.prepare();
-
-                    // Toast.makeText(getActivity(), "没有违纪信息可显示", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
+                    Message message = new Message();
+                    message.what = 3;
+                    handler.sendMessage(message);
                 } else {
-                    SearchList = new ArrayList<>();
                     for (int i = HowMany - 1; i >= 0; i--) {
                         WarningSearchAd warningSearchAd = new WarningSearchAd(WarningTitle[i], WarningStudent[i], WarningID[i], WarningDate[i]);
                         musicList.add(warningSearchAd);
@@ -168,6 +167,10 @@ public class AllWarningActivity extends Fragment {
                     editor.apply();
                     startActivity(intent);
                     getActivity().finish();
+                    break;
+                case 3:
+                    TextView tips_no_warning = viewT.findViewById(R.id.tips_no_warning);
+                    tips_no_warning.setVisibility(View.VISIBLE);
                     break;
             }
         }

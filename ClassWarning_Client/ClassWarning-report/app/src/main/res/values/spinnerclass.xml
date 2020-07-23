@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerclass">
+        <item>1班</item>
+        <item>2班</item>
+        <item>3班</item>
+        <item>4班</item>
+        <item>5班</item>
+        <item>6班</item>
+        <item>7班</item>
+        <item>8班</item>
+        <item>9班</item>
+        <item>10班</item>
+        <item>11班</item>
+        <item>12班</item>
+        <item>13班</item>
+        <item>14班</item>
+        <item>15班</item>
+        <item>16班</item>
+        <item>17班</item>
+        <item>18班</item>
+        <item>19班</item>
+        <item>20班</item>
+    </string-array>
+</resources>

@@ -48,14 +48,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/getUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@null"
                 android:digits="0123456789qwertyuioplkjhgfdsazxcvbnm"
@@ -65,17 +65,17 @@
                 android:id="@+id/divider11"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
                 android:background="?android:attr/listDivider" />
 
             <EditText
                 android:id="@+id/getPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@null"
                 android:ems="10"
@@ -86,8 +86,8 @@
                 android:id="@+id/divider12"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="24dp"
                 android:background="?android:attr/listDivider" />
         </LinearLayout>

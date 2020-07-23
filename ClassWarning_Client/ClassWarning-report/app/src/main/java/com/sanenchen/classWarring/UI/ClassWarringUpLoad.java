@@ -262,7 +262,7 @@ public class ClassWarringUpLoad extends Fragment {
             String jsonData = getDataJson.getSearchReply("getTotalClassWarning", getActivity(), null, null);
             JSONArray jsonArray = new JSONArray(jsonData);
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            int geta = jsonObject.getInt("WarningTotal") + 1;
+            int geta = jsonObject.getInt("warningTotal") + 1;
             getDataJson.getAddWarnReply(Title, WarningGroup, WarningStudent, WarningFun, FunStartTime, FunEndTime, BeizhuSS, ee, geta, getActivity());
         } catch (Exception e) {
 

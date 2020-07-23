@@ -41,7 +41,7 @@ public class ItemRAdapter extends RecyclerView.Adapter<ItemRAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false);
         final ViewHolder holder = new ViewHolder(view);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
