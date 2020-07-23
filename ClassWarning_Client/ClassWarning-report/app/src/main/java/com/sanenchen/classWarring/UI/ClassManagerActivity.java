@@ -85,7 +85,6 @@ public class ClassManagerActivity extends Fragment {
                 mDialog.setCancelable(true);
                 mDialog.show();
                 //设置弹出框的宽高
-                mDialog.getWindow().setLayout(400, 250);
                 mDialog.getWindow().setContentView(layout);
                 // 监听两个按钮
                 Button new_class_closedialog = layout.findViewById(R.id.new_class_closedialog);
@@ -113,7 +112,6 @@ public class ClassManagerActivity extends Fragment {
                             }
                         }).start();
                         mDialog.dismiss();
-                        Toast.makeText(getActivity(), "班级创建中···", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

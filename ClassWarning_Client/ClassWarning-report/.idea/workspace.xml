@@ -30,9 +30,9 @@
       <list>
         <option value="resourceFile" />
         <option value="Class" />
-        <option value="layoutResourceFile" />
         <option value="layoutResourceFile_vertical" />
         <option value="valueResourceFile" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -51,7 +51,7 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-07-17T13:26:10.626Z" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/sanenchen/classWarring/ListViewOrRecyclerView/UpdateLog" />
     <property name="memory.settings.postsync.last.time.stamp" value="1595409127359" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
@@ -62,16 +62,18 @@
     <option name="MODULE_TAB" value="Default Config" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\res\layout" />
-      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\res\layout_two" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\java\com\sanenchen\classWarring\ListViewOrRecyclerView\UpdateLog" />
+      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\java\com\sanenchen\classWarring\ListViewOrRecyclerView" />
+      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\res\drawable" />
+      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\res\drawable-v24" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.sanenchen.classWarring.ListViewOrRecyclerView.ClassManager" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\res\drawable" />
-      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\res\drawable-v24" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\res\layout" />
+      <recent name="D:\Codes\Android\GitHub\ClassWarning\ClassWarning_Client\ClassWarning-report\app\src\main\res\layout_two" />
     </key>
   </component>
   <component name="RunManager">
@@ -157,18 +159,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1595477857185" />
-    <state x="200" y="96" key="#PSD" timestamp="1595484678073">
+    <state x="200" y="96" key="#PSD" timestamp="1595520931109">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="200" y="96" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1595484678073" />
+    <state x="200" y="96" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1595520931109" />
     <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser" timestamp="1595416792021">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="488" y="73" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1595416792021" />
-    <state x="119" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1595416898628">
+    <state x="119" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1595518633171">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="119" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1595416898628" />
+    <state x="119" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1595518633171" />
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595425917409">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -177,42 +179,46 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="263" y="119" key="AndroidCreateResourceDirectoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1595460393414" />
-    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1595460427610">
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1595518181440">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1595460427610" />
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom" timestamp="1595481660535">
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1595518181440" />
+    <state x="283" y="140" key="FileChooserDialogImpl" timestamp="1595497269397">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1595481660535" />
-    <state width="1323" height="178" key="GridCell.Tab.0.center" timestamp="1595481660535">
+    <state x="283" y="140" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1595497269397" />
+    <state width="1323" height="222" key="GridCell.Tab.0.bottom" timestamp="1595519907626">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1595481660535" />
-    <state width="1323" height="178" key="GridCell.Tab.0.left" timestamp="1595481660535">
+    <state width="1323" height="222" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1595519907626" />
+    <state width="1323" height="222" key="GridCell.Tab.0.center" timestamp="1595519907625">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1595481660535" />
-    <state width="1323" height="178" key="GridCell.Tab.0.right" timestamp="1595481660535">
+    <state width="1323" height="222" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1595519907625" />
+    <state width="1323" height="222" key="GridCell.Tab.0.left" timestamp="1595519907625">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="178" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1595481660535" />
-    <state width="1323" height="222" key="GridCell.Tab.1.bottom" timestamp="1595418422999">
+    <state width="1323" height="222" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1595519907625" />
+    <state width="1323" height="222" key="GridCell.Tab.0.right" timestamp="1595519907625">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="222" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1595418422999" />
-    <state width="1323" height="222" key="GridCell.Tab.1.center" timestamp="1595418422999">
+    <state width="1323" height="222" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1595519907625" />
+    <state width="1323" height="222" key="GridCell.Tab.1.bottom" timestamp="1595519907626">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="222" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1595418422999" />
-    <state width="1323" height="222" key="GridCell.Tab.1.left" timestamp="1595418422998">
+    <state width="1323" height="222" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1595519907626" />
+    <state width="1323" height="222" key="GridCell.Tab.1.center" timestamp="1595519907626">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="222" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1595418422998" />
-    <state width="1323" height="222" key="GridCell.Tab.1.right" timestamp="1595418422999">
+    <state width="1323" height="222" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1595519907626" />
+    <state width="1323" height="222" key="GridCell.Tab.1.left" timestamp="1595519907626">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="222" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1595418422999" />
+    <state width="1323" height="222" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1595519907626" />
+    <state width="1323" height="222" key="GridCell.Tab.1.right" timestamp="1595519907626">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="222" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1595519907626" />
     <state x="184" y="6" key="SettingsEditor" timestamp="1594971433346">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -20,7 +20,6 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
-            app:cardBackgroundColor="#4DFFFFFF"
             app:cardCornerRadius="2dp"
             app:cardElevation="3dp">
 
@@ -133,7 +132,8 @@
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
         android:layout_weight="2"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:overScrollMode="never">
 
     </androidx.recyclerview.widget.RecyclerView>
 
