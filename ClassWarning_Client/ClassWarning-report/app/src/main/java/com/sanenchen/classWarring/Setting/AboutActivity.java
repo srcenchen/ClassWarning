@@ -2,6 +2,8 @@ package com.sanenchen.classWarring.Setting;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -95,7 +97,48 @@ public class AboutActivity extends Fragment {
                 });
             }
         });
+
+        // 在GitHub上的项目
+        FrameLayout theAppInGithub = viewThis.findViewById(R.id.theAppInGithub);
+        theAppInGithub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://github.com/sanenchen-hub/ClassWarning");
+                intent.setData(content_url);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        // 个人博客
+        FrameLayout selfBlog = viewThis.findViewById(R.id.selfBlog);
+        selfBlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://blog.lyqmc.cn");
+                intent.setData(content_url);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        // 个人Github
+        FrameLayout selfGithub = viewThis.findViewById(R.id.selfGithub);
+        selfGithub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("https://github.com/sanenchen-hub");
+                intent.setData(content_url);
+                getActivity().startActivity(intent);
+            }
+        });
     }
+
+
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message msg) {

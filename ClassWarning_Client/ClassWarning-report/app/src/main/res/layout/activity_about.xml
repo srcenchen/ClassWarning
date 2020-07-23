@@ -113,6 +113,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/theAppInGithub"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:clickable="true"
@@ -238,6 +239,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/selfBlog"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:clickable="true"
@@ -263,6 +265,7 @@
                         </FrameLayout>
 
                         <FrameLayout
+                            android:id="@+id/selfGithub"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"
                             android:clickable="true"

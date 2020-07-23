@@ -83,19 +83,14 @@ public class NewUserActivity extends AppCompatActivity {
 
                                 String re = getDataJson.getAddUserReply(GetUser, SHA224.Sha224_reply(GetPassword), SHA224.Sha224_reply(GetUser) + dom, schoolName
                                         , grade, Worker);
+                                
+                                Looper.prepare();
+                                Toast.makeText(NewUserActivity.this, "注册成功！请登录！", Toast.LENGTH_SHORT).show();
+                                Message message = new Message();
+                                message.what = 1;
+                                handler.sendMessage(message);
+                                Looper.loop();
 
-                                if (re.equals("注册成功!")) {
-                                    Looper.prepare();
-                                    Toast.makeText(NewUserActivity.this, "注册成功！请登录！", Toast.LENGTH_SHORT).show();
-                                    Message message = new Message();
-                                    message.what = 1;
-                                    handler.sendMessage(message);
-                                    Looper.loop();
-                                } else {
-                                    Looper.prepare();
-                                    Toast.makeText(NewUserActivity.this, "遇到未知错误！", Toast.LENGTH_SHORT).show();
-                                    Looper.loop();
-                                }
                             } else if (getDataJson.getLoginPassword(GetUser).equals("")) {
                                 Looper.prepare();
                                 Toast.makeText(NewUserActivity.this, "网络错误！", Toast.LENGTH_SHORT).show();
